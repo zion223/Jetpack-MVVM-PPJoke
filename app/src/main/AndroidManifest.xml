@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
 
-
     <application
         android:name=".JokeApplication"
         android:allowBackup="true"
@@ -24,10 +23,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <!--        这是是QQ快捷登录SDK 里面包含但没用的 apache的类，需要在这里通过uses-library去除掉 -->
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -41,32 +36,30 @@
 
         <activity
             android:name=".ui.publish.PublishActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.publish.CaptureActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/capture"></activity>
-
+            android:theme="@style/capture" />
         <activity
             android:name=".ui.publish.PreviewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/preview"></activity>
+            android:theme="@style/preview" />
 
-        <activity android:name=".ui.login.LoginActivity"></activity>
+        <activity android:name=".ui.login.LoginActivity" />
 
         <activity
             android:name=".ui.detail.FeedDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/feedDetail"></activity>
+            android:theme="@style/feedDetail" />
 
-        <activity android:name=".ui.find.TagFeedListActivity"></activity>
+        <activity android:name=".ui.find.TagFeedListActivity" />
 
-        <activity android:name=".ui.my.ProfileActivity"></activity>
+        <activity android:name=".ui.my.ProfileActivity" />
 
-        <activity android:name=".ui.my.UserBehaviorListActivity"></activity>
+        <activity android:name=".ui.my.UserBehaviorListActivity" />
 
-
-        <!-- 注册SDKActivity -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -81,10 +74,17 @@
                 <data android:scheme="tencent101794421" />
             </intent-filter>
         </activity>
+
+
+        <!-- 注册SDKActivity -->
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
     </application>
+
 
 </manifest>

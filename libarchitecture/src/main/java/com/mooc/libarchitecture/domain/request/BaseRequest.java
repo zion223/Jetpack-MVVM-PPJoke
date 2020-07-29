@@ -20,6 +20,8 @@ package com.mooc.libarchitecture.domain.request;
 
 
 import com.mooc.libarchitecture.domain.manager.NetState;
+import com.kunminx.architecture.ui.callback.ProtectedUnPeekLiveData;
+import com.kunminx.architecture.ui.callback.UnPeekLiveData;
 
 /**
  * Create by KunMinX at 2020/7/20

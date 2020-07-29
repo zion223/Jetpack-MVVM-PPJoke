@@ -1,39 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout>
+    <data>
 
+        <variable
+            name="vm"
+            type="com.mooc.ppjoke.ui.login.LoginViewModel" />
+        <variable
+            name="proxy"
+            type="com.mooc.ppjoke.ui.login.LoginActivity.ClickProxy" />
+    </data>
 
-    <ImageView
-        android:id="@+id/action_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_30"
-        android:src="@drawable/icon_close"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/dp_60"
-        android:src="@mipmap/icon_jetpack"/>
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/action_login"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="@dimen/dp_30"
-        android:layout_marginRight="@dimen/dp_30"
-        android:layout_marginBottom="150dp"
-        android:gravity="center"
-        android:text="@string/login_text"
-        android:textColor="@color/color_white"
-        android:textSize="@dimen/sp_16"
-        app:backgroundTint="@color/color_theme"
-        app:cornerRadius="25dp"/>
-</FrameLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/action_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_30"
+            android:onClick="@{()->proxy.finishActivity()}"
+            android:src="@drawable/icon_close" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_60"
+            android:src="@mipmap/icon_jetpack" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="150dp"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:gravity="center"
+            android:onClick="@{()->proxy.login()}"
+            android:text="@string/login_text"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/sp_16"
+            app:backgroundTint="@color/color_theme"
+            app:cornerRadius="25dp" />
+    </FrameLayout>
+
+
+</layout>

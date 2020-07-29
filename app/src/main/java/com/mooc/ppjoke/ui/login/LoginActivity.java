@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.mooc.libarchitecture.ui.page.BaseActivity;
 import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
+import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.model.User;
 import com.tencent.connect.UserInfo;
@@ -23,39 +25,36 @@ import com.tencent.tauth.UiError;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private View actionClose;
-    private View actionLogin;
+public class LoginActivity extends BaseActivity {
+
     private Tencent tencent;
 
+    private LoginViewModel mLoginViewModel;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_layout_login);
-
-        actionClose = findViewById(R.id.action_close);
-        actionLogin = findViewById(R.id.action_login);
-
-        actionClose.setOnClickListener(this);
-        actionLogin.setOnClickListener(this);
+    protected void initViewModel() {
+        mLoginViewModel = getActivityViewModel(LoginViewModel.class);
     }
 
     @Override
-    public void onClick(View v) {
+    protected DataBindingConfig getDataBindingConfig() {
+        return new DataBindingConfig(R.layout.activity_layout_login, BR.vm, mLoginViewModel)
+                .addBindingParam(BR.proxy, new ClickProxy());
+    }
 
-        if (v.getId() == R.id.action_close) {
+    public class ClickProxy {
+        public void login() {
+            if (tencent == null) {
+                tencent = Tencent.createInstance("101794421", getApplicationContext());
+            }
+            tencent.login(LoginActivity.this, "all", loginListener);
+        }
+
+        public void finishActivity() {
             finish();
-        } else if (v.getId() == R.id.action_login) {
-            login();
         }
     }
 
-    private void login() {
-        if (tencent == null) {
-            tencent = Tencent.createInstance("101794421", getApplicationContext());
-        }
-        tencent.login(this, "all", loginListener);
-    }
 
     IUiListener loginListener = new IUiListener() {
         @Override
