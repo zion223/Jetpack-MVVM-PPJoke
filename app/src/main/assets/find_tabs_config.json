@@ -1,0 +1,22 @@
+{
+  "activeSize": 16,
+  "normalSize": 14,
+  "activeColor": "#ED7282",
+  "normalColor": "#666666",
+  "select": 1,
+  "tabGravity": 1,
+  "tabs": [
+    {
+      "title": "关注",
+      "index": 0,
+      "tag": "onlyFollow",
+      "enable": true
+    },
+    {
+      "title": "推荐",
+      "index": 1,
+      "tag": "excludeFollow",
+      "enable": true
+    }
+  ]
+}

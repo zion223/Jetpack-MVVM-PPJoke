@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/action_close"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:padding="@dimen/dp_6"
+                android:src="@drawable/icon_close" />
+
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/publish_title"
+                android:textColor="@color/color_000"
+                android:textSize="@dimen/sp_16" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/action_publish"
+                android:layout_width="70dp"
+                android:layout_height="@dimen/dp_30"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimen_16"
+                android:gravity="center"
+                android:text="@string/publich_button"
+                android:textColor="@color/color_white"
+                app:backgroundTint="@color/color_theme"
+                app:cornerRadius="15dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_gray2" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/input_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:gravity="left|top"
+            android:hint="@string/publish_edit_hint"
+            android:maxLines="1000"
+            android:minHeight="100dp"
+            android:padding="@dimen/dimen_16"
+            android:textColor="@color/color_000"
+            android:textColorHint="@color/color_999"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+        <View
+            android:id="@+id/input_line"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/color_gray2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_view" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_add_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_25"
+            android:layout_marginLeft="@dimen/dimen_16"
+            android:layout_marginTop="@dimen/dimen_16"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dimen_10"
+            android:text="@string/publish_add_tag"
+            android:textColor="@color/color_theme"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
+            app:backgroundTint="@color/color_white"
+            app:cornerRadius="@dimen/dp_13"
+            app:icon="@drawable/ic_add_club"
+            app:iconGravity="textEnd"
+            app:iconPadding="2dp"
+            app:iconTint="@color/color_theme"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_line"
+            app:strokeColor="@color/color_theme"
+            app:strokeWidth="1dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/action_add_file"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="@dimen/dimen_16"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:src="@drawable/ic_add_file"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/action_add_tag" />
+
+        <FrameLayout
+            android:id="@+id/file_container"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_16"
+            android:layout_marginTop="@dimen/dimen_16"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/action_add_tag">
+
+            <com.mooc.ppjoke.view.PPImageView
+                android:id="@+id/cover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/video_icon"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_video_play" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/action_delete_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|top"
+                android:paddingLeft="@dimen/dp_6"
+                app:srcCompat="@drawable/icon_close"
+                app:tint="@color/color_white" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

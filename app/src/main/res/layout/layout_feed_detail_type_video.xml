@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="feed"
+            type="com.mooc.ppjoke.model.Feed" />
+
+        <variable
+            name="fullscreen"
+            type="java.lang.Boolean" />
+
+        <import type="com.mooc.ppjoke.ui.InteractionPresenter"/>
+
+        <import type="com.mooc.libcommon.utils.PixUtils"/>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.mooc.ppjoke.view.FullScreenPlayerView
+            android:id="@+id/player_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior=".ui.detail.ViewZoomBehavior"
+            app:min_height="200dp"
+            app:scrolling_id="@+id/recycler_view"/>
+
+
+        <include
+            android:id="@+id/author_info"
+            layout="@layout/layout_feed_detail_author_info"
+            app:anchorId="@+id/player_view"
+            app:feed="@{feed}"
+            app:fullscreen="@{false}"
+            app:layout_behavior=".ui.detail.ViewAnchorBehavior"
+            app:leftMargin="@{PixUtils.dp2px(16)}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:overScrollMode="never"
+            app:anchorId="@+id/author_info"
+            app:layout_behavior=".ui.detail.ViewAnchorBehavior"/>
+
+        <include
+            android:id="@+id/bottom_interaction"
+            layout="@layout/layout_feed_detail_bottom_inateraction"
+            app:feed="@{feed}"
+            app:fullscreen="@{fullscreen}"/>
+
+        <include
+            android:id="@+id/fullscreen_author_info"
+            layout="@layout/layout_feed_detail_author_info"
+            app:feed="@{feed}"
+            app:fullscreen="@{fullscreen}"
+            app:leftMargin="@{PixUtils.dp2px(60)}"/>
+
+        <ImageView
+            android:id="@+id/action_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/icon_back_white"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

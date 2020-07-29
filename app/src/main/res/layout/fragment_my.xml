@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.mooc.ppjoke.model.User" />
+
+        <import type="com.mooc.ppjoke.utils.StringConvert" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.mooc.ppjoke.view.PPImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:blur_url="@{user.avatar}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:radius="@{50}"
+            android:scaleType="fitXY"
+            tools:background="#ff0000" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/action_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginRight="16dp"
+            android:fitsSystemWindows="true"
+            android:src="@drawable/icon_logout"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mooc.ppjoke.view.PPImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="75dp"
+            app:image_url="@{user.avatar}"
+            app:isCircle="@{true}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:radius="@{0}"
+            tools:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="75dp"
+            android:text="@{user.name}"
+            android:textColor="@color/color_000"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintLeft_toRightOf="@+id/avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="神秘的jetpack" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_6"
+            android:text="@{user.description}"
+            android:textColor="@color/color_999"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintLeft_toRightOf="@+id/avatar"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="神秘的jetpack" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/go_detail"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="@dimen/dp_10"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_right_arrow"
+            app:tint="@color/color_white" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_overlap"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="180dp"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@color/color_white"
+            app:cardCornerRadius="@dimen/dp_10"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/like_count"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="@{StringConvert.convertSpannable(user.likeCount,@string/like_count)}"
+                    android:textColor="@color/color_666"
+                    tools:text="100\n获赞" />
+
+                <TextView
+                    android:id="@+id/fans_count"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="@{StringConvert.convertSpannable(user.followerCount,@string/fans_count)}"
+                    android:textColor="@color/color_666"
+                    tools:text="100\n粉丝" />
+
+
+                <TextView
+                    android:id="@+id/follow_count"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="@{StringConvert.convertSpannable(user.followCount,@string/follow_count)}"
+                    android:textColor="@color/color_666"
+                    tools:text="100\n关注" />
+
+
+                <TextView
+                    android:id="@+id/score_count"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.3"
+                    android:text="@{StringConvert.convertSpannable(user.score,@string/score_count)}"
+                    android:textColor="@color/color_666"
+                    tools:text="1000\n粉丝" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@color/color_white"
+            app:cardCornerRadius="@dimen/dp_10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_overlap">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/user_feed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_profile_my_post"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:gravity="center"
+                    android:text="@string/fragment_my_feed"
+                    android:textColor="@color/color_333"
+                    android:textSize="@dimen/sp_12" />
+
+
+                <TextView
+                    android:id="@+id/user_comment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_profile_my_comment"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:gravity="center"
+                    android:text="@string/fragment_my_comment"
+                    android:textColor="@color/color_333"
+                    android:textSize="@dimen/sp_12" />
+
+
+                <TextView
+                    android:id="@+id/user_favorite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_profile_my_collection"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:gravity="center"
+                    android:text="@string/fragment_my_favorite"
+                    android:textColor="@color/color_333"
+                    android:textSize="@dimen/sp_12" />
+
+
+                <TextView
+                    android:id="@+id/user_history"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_profile_my_read_history"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:gravity="center"
+                    android:text="@string/fragment_my_history"
+                    android:textColor="@color/color_333"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

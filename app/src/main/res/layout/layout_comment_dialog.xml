@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:animateLayoutChanges="false"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/comment_ext_layout"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:visibility="gone">
+
+            <com.mooc.ppjoke.view.PPImageView
+                android:id="@+id/comment_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/comment_icon_video"
+                android:layout_width="@dimen/dimen_20"
+                android:layout_height="@dimen/dimen_20"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_video_play"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/comment_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|top"
+                android:paddingLeft="@dimen/dp_3"
+                app:srcCompat="@drawable/icon_close"
+                app:tint="@color/color_white" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_gray2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_10"
+            android:paddingRight="@dimen/dimen_10">
+
+            <com.mooc.libcommon.view.PPEditTextView
+                android:id="@+id/input_view"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edit_view"
+                android:gravity="center_vertical"
+                android:hint="@string/comment_hint"
+                android:paddingLeft="@dimen/sp_10"
+                android:textColor="@color/color_333"
+                android:textColorHint="@color/color_999"
+                android:textSize="@dimen/sp_12"></com.mooc.libcommon.view.PPEditTextView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/comment_video"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:src="@drawable/icon_publish_video"></androidx.appcompat.widget.AppCompatImageView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/comment_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_11"
+                android:paddingTop="@dimen/dp_3"
+                android:paddingRight="@dimen/dp_11"
+                android:paddingBottom="@dimen/dp_3"
+                android:text="@string/comment_send_text"
+                android:textColorHint="@color/color_white"
+                app:backgroundTint="@color/color_theme"
+                app:cornerRadius="@dimen/dp_6"></com.google.android.material.button.MaterialButton>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="tagList"
+            type="com.mooc.ppjoke.model.TagList" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:orientation="vertical">
+
+        <com.mooc.ppjoke.view.PPImageView
+            android:id="@+id/tag_avtar"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:scaleType="fitXY"
+            app:image_url="@{tagList.icon}"
+            app:isCircle="@{false}"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:radius="@{8}"/>
+
+        <TextView
+            android:id="@+id/tag_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:text="@{tagList.title}"
+            android:textColor="@color/color_000"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/tag_avtar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="神秘的jetpack"/>
+
+        <TextView
+            android:id="@+id/tag_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@{tagList.feedNum+@string/tag_list_item_hot_feed}"
+            android:textColor="@color/color_999"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toRightOf="@+id/tag_avtar"
+            app:layout_constraintTop_toBottomOf="@+id/tag_title"
+            tools:text="神秘的jetpack"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_follow"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="28dp"
+            android:layout_marginRight="@dimen/dimen_10"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_0"
+            android:paddingTop="@dimen/dp_0"
+            android:paddingRight="@dimen/dp_0"
+            android:paddingBottom="@dimen/dp_0"
+            android:text="@{tagList.hasFollow?@string/tag_follow:@string/tag_unfollow}"
+            android:textSize="13sp"
+            app:backgroundTint="@color/color_theme"
+            app:cornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/tag_follow"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_gravity="bottom"
+            android:background="@color/color_gray2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

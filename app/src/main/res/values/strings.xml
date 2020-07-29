@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Jetpack</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="login_text">QQ快捷登录</string>
+    <string name="has_follow">已关注</string>
+    <string name="unfollow">关注</string>
+    <string name="feed_detil_hint">友善的皮才是真的皮</string>
+    <string name="like">赞</string>
+    <string name="feed_comment">评论</string>
+    <string name="has_collect">已收藏</string>
+    <string name="collect">收藏</string>
+    <string name="share">分享</string>
+    <string name="feed_detail_type_image_title">帖子详情页</string>
+    <string name="author">作者</string>
+    <string name="feed_comment_empty">还没有评论，快来抢一楼吧</string>
+    <string name="comment_hint">友善的皮才是真的皮</string>
+    <string name="comment_send_text">发送</string>
+    <string name="capture_tips">轻触拍照，长按摄像</string>
+    <string name="capture_permission_message">必须的权限没有得到授权，功能将无法使用 请重新授权!</string>
+    <string name="capture_permission_no">不</string>
+    <string name="capture_permission_ok">好的</string>
+    <string name="preview_ok">完成</string>
+    <string name="upload_text">正在发布...</string>
+    <string name="file_upload_failed">文上传失败,请重新发布</string>
+    <string name="publish_title">帖子发布</string>
+    <string name="publish_edit_hint">加个话题,内容会被更多人看到哈~</string>
+    <string name="publish_add_tag">添加话题</string>
+    <string name="publich_button">发布</string>
+    <string name="publish_exit_message">继续退出编辑的内容将会丢失</string>
+    <string name="publish_exit_action_cancel">取消</string>
+    <string name="publish_exit_action_ok">退出</string>
+    <string name="tag_title">选择标签</string>
+    <string name="file_upload_cover_message">封面图上传失败</string>
+    <string name="file_upload_original_message">原始文件上传失败</string>
+    <string name="feed_publisj_success">帖子发布成功,去沙发页看看吧</string>
+    <string name="feed_publish_ing">正在发布...</string>
+    <string name="tag_list_item_hot_feed">条热门内容</string>
+    <string name="tag_follow">已关注</string>
+    <string name="tag_unfollow">关注</string>
+    <string name="tag_list_no_follow">还没关注任何数据,去推荐页面看看吧~</string>
+    <string name="tag_list_no_follow_button">看看推荐</string>
+    <string name="like_count">\n获赞</string>
+    <string name="fans_count">\n粉丝</string>
+    <string name="follow_count">\n关注</string>
+    <string name="score_count">\n积分</string>
+    <string name="fragment_my_feed">帖子</string>
+    <string name="fragment_my_comment">评论</string>
+    <string name="fragment_my_favorite">收藏</string>
+    <string name="fragment_my_history">观看历史</string>
+    <string name="fragment_my_logout">确定要继续退出吗？</string>
+    <string name="fragment_my_logout_ok">确定</string>
+    <string name="fragment_my_logout_cancel">取消</string>
+
+    <string-array name="profile_tabs">
+        <item>动态</item>
+        <item>帖子</item>
+        <item>评论</item>
+    </string-array>
+</resources>

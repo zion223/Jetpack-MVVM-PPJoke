@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="feed"
+            type="com.mooc.ppjoke.model.Feed" />
+
+        <import type="com.mooc.libcommon.utils.PixUtils"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/layout_feed_detail_author_info"
+            app:feed="@{feed}"
+            app:fullscreen="@{false}"
+            app:leftMargin="@{PixUtils.dp2px(16)}"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"/>
+
+        <include
+            layout="@layout/layout_feed_text"
+            app:feedText="@{feed.feeds_text}"
+            app:lines="@{1000}"/>
+
+        <com.mooc.ppjoke.view.PPImageView
+            android:id="@+id/header_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"
+            android:layout_marginTop="6dp"
+            android:background="@color/color_divider"/>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.mooc.ppjoke.model.User" />
+
+        <variable
+            name="expand"
+            type="java.lang.Boolean" />
+
+        <import type="android.view.View" />
+
+        <import type="com.mooc.ppjoke.utils.StringConvert" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:divider="@drawable/list_divider_2px"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            android:fitsSystemWindows="true"
+            app:statusBarForeground="@color/color_white"
+            android:showDividers="middle|end">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:minHeight="@dimen/dp_48"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="@color/color_white">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:paddingLeft="@dimen/dimen_16"
+                    android:paddingRight="@dimen/dimen_16"
+                    android:paddingBottom="@dimen/dimen_10">
+
+                    <com.mooc.ppjoke.view.PPImageView
+                        android:id="@+id/author_avatar_large"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        app:image_url="@{user.avatar}"
+                        app:isCircle="@{true}"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:radius="@{0}"
+                        tools:src="@mipmap/ic_launcher_round">
+
+                    </com.mooc.ppjoke.view.PPImageView>
+
+
+                    <LinearLayout
+                        android:id="@+id/profile_info"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintLeft_toRightOf="@+id/author_avatar_large"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/like_count"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.3"
+                            android:text="@{StringConvert.convertSpannable(user.likeCount,@string/like_count)}"
+                            android:textColor="@color/color_666"
+                            tools:text="100\n获赞" />
+
+                        <TextView
+                            android:id="@+id/fans_count"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.3"
+                            android:text="@{StringConvert.convertSpannable(user.followerCount,@string/fans_count)}"
+                            android:textColor="@color/color_666"
+                            tools:text="100\n粉丝"></TextView>
+
+
+                        <TextView
+                            android:id="@+id/follow_count"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.3"
+                            android:text="@{StringConvert.convertSpannable(user.followCount,@string/follow_count)}"
+                            android:textColor="@color/color_666"
+                            tools:text="100\n关注"></TextView>
+
+
+                        <TextView
+                            android:id="@+id/score_count"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.3"
+                            android:text="@{StringConvert.convertSpannable(user.score,@string/score_count)}"
+                            android:textColor="@color/color_666"
+                            tools:text="1000\n粉丝"></TextView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_10"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:text="@{user.description}"
+                        android:textColor="@color/color_999"
+                        android:textSize="@dimen/sp_12"
+                        app:layout_constraintLeft_toRightOf="@id/author_avatar_large"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_info"
+                        tools:text="神秘的jetpack"></TextView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:background="@color/color_white"
+                    app:layout_collapseMode="pin">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/top_user_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/action_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_10"
+                            android:src="@drawable/icon_back_black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <com.mooc.ppjoke.view.PPImageView
+                            android:id="@+id/top_author_avatar"
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="@dimen/dp_30"
+                            android:layout_marginLeft="@dimen/dimen_10"
+                            android:src="@mipmap/ic_launcher_round"
+                            android:visibility="@{expand?View.GONE:View.VISIBLE}"
+                            app:image_url="@{user.avatar}"
+                            app:isCircle="@{true}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/action_back"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/top_author_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_10"
+                            android:text="@{user.name}"
+                            android:textColor="@color/color_000"
+                            android:textSize="@dimen/sp_12"
+                            android:textStyle="bold"
+                            android:visibility="@{expand?View.GONE:View.VISIBLE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@+id/top_author_avatar"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="神秘的jetpack"/>
+
+                        <TextView
+                            android:id="@+id/top_author_name_large"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{user.name}"
+                            android:textColor="@color/color_000"
+                            android:textColorHint="@color/color_000"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:visibility="@{expand?View.VISIBLE:View.GONE}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="神秘的jetpack"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="bottom"
+                app:tabGravity="center"
+                app:tabIndicator="@null"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/color_theme"
+                app:tabTextColor="@color/color_999"/>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

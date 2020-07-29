@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextureView
+            android:id="@+id/texture_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/capture_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="200dp"
+            android:text="@string/capture_tips"
+            android:textColor="@color/color_white"/>
+
+        <com.mooc.ppjoke.view.RecordView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/record_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/dp_60"
+            app:duration="10"
+            app:fill_color="@color/color_white"
+            app:progress_color="@color/color_theme"
+            app:progress_width="@dimen/dp_4"
+            app:radius="@dimen/dp_40"/>
+    </FrameLayout>
+</layout>

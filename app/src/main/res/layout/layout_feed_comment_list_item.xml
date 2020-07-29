@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="comment"
+            type="com.mooc.ppjoke.model.Comment" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <import type="com.mooc.ppjoke.ui.login.UserManager" />
+
+        <import type="com.mooc.ppjoke.utils.TimeUtils" />
+
+        <import type="com.mooc.ppjoke.ui.InteractionPresenter" />
+
+        <variable
+            name="owner"
+            type="androidx.lifecycle.LifecycleOwner" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dp_10">
+
+        <com.mooc.ppjoke.view.PPImageView
+            android:id="@+id/author_avatar"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            app:image_url="@{comment.author.avatar}"
+            app:isCircle="@{true}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/splash" />
+
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@{comment.author.name}"
+            android:textColor="@color/color_000"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintLeft_toRightOf="@+id/author_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="神秘的jetpack" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/label_author"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_14"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingLeft="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_0"
+            android:paddingRight="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_0"
+            android:stateListAnimator="@null"
+            android:text="@string/author"
+            android:textColor="@color/color_white"
+            android:textSize="10sp"
+            app:backgroundTint="@color/color_theme"
+            app:cornerRadius="@dimen/dp_3"
+            app:layout_constraintBaseline_toBaselineOf="@+id/author_name"
+            app:layout_constraintLeft_toRightOf="@+id/author_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@{TimeUtils.calculate(comment.createTime)}"
+            android:textColor="@color/color_999"
+            android:textSize="10sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/author_name"
+            app:layout_constraintLeft_toRightOf="@+id/label_author"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="12天前" />
+
+        <TextView
+            android:id="@+id/comment_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginRight="16dp"
+            android:drawableRight="@{comment.ugc.hasLiked?@drawable/icon_cell_liked:@drawable/icon_cell_like}"
+            android:drawablePadding="@dimen/dp_3"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:onClick="@{()->InteractionPresenter.toggleCommentLike(owner,comment)}"
+            android:text="@{String.valueOf(comment.ugc.likeCount)}"
+            android:textColor="@{comment.ugc.hasLiked?@color/color_theme:@color/color_999}"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:drawableRight="@drawable/icon_cell_liked_large"
+            tools:text="1000" />
+
+        <ImageView
+            android:id="@+id/comment_delete"
+            android:layout_width="@dimen/dp_14"
+            android:layout_height="@dimen/dp_14"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@drawable/icon_item_cell_delete"
+            app:layout_constraintBottom_toBottomOf="@id/comment_like"
+            app:layout_constraintRight_toLeftOf="@+id/comment_like"
+            app:layout_constraintTop_toTopOf="@id/comment_like" />
+
+        <TextView
+            android:id="@+id/comment_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="@{comment.commentText}"
+            android:textColor="@color/color_333"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/author_avatar"
+            app:layout_constraintRight_toLeftOf="@+id/comment_like"
+            app:layout_constraintTop_toBottomOf="@+id/author_name"
+            tools:text="comment.commentText" />
+
+        <FrameLayout
+            android:id="@+id/comment_ext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            app:layout_constraintLeft_toRightOf="@+id/author_avatar"
+            app:layout_constraintTop_toBottomOf="@id/comment_text">
+
+            <com.mooc.ppjoke.view.PPImageView
+                android:id="@+id/comment_cover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/color_gray2"
+                android:scaleType="center"
+                tools:layout_height="100dp"
+                tools:layout_width="100dp">
+
+            </com.mooc.ppjoke.view.PPImageView>
+
+            <ImageView
+                android:id="@+id/video_icon"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_video_play"
+                android:contentDescription="TODO"></ImageView>
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

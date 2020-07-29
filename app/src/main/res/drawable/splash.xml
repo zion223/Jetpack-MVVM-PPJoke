@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/color_white"></solid>
+        </shape>
+    </item>
+
+    <item
+        android:width="150dp"
+        android:height="150dp"
+        android:gravity="center">
+        <bitmap android:src="@mipmap/icon_jetpack"></bitmap>
+    </item>
+</layer-list>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RecordView">
+        <attr name="progress_color" format="color"></attr>
+        <attr name="progress_width" format="dimension"></attr>
+        <attr name="fill_color" format="color"></attr>
+        <attr name="radius" format="dimension"></attr>
+        <attr name="duration" format="integer"></attr>
+    </declare-styleable>
+</resources>

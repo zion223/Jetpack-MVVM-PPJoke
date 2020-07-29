@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <activity></activity>
+    <dialog ></dialog>
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.mooc.ppjoke.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="arg1"
+            app:argType="string"
+            android:defaultValue="null" />
+        <action
+            android:id="@+id/action_id"
+            app:destination="@id/navigation_dashboard" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="www.mooc.com" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.mooc.ppjoke.ui.sofa.SofaFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_sofa" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.mooc.ppjoke.ui.find.FindFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_find" />
+</navigation>
