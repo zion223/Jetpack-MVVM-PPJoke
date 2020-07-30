@@ -6,11 +6,14 @@
     <data>
 
         <variable
-            name="user"
-            type="com.mooc.ppjoke.model.User" />
+            name="vm"
+            type="com.mooc.ppjoke.ui.state.MyViewModel" />
 
         <import type="com.mooc.ppjoke.utils.StringConvert" />
 
+        <variable
+            name="proxy"
+            type="com.mooc.ppjoke.ui.my.MyFragment.ClickProxy" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +23,7 @@
         <com.mooc.ppjoke.view.PPImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:blur_url="@{user.avatar}"
+            app:blur_url="@{vm.user.avatar}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:radius="@{50}"
@@ -35,6 +38,7 @@
             android:layout_marginRight="16dp"
             android:fitsSystemWindows="true"
             android:src="@drawable/icon_logout"
+            android:onClick="@{() -> proxy.actionLogout()}"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,7 +48,7 @@
             android:layout_height="@dimen/dp_45"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="75dp"
-            app:image_url="@{user.avatar}"
+            app:image_url="@{vm.user.avatar}"
             app:isCircle="@{true}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="75dp"
-            android:text="@{user.name}"
+            android:text="@{vm.user.name}"
             android:textColor="@color/color_000"
             android:textSize="@dimen/sp_16"
             app:layout_constraintLeft_toRightOf="@+id/avatar"
@@ -70,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_6"
-            android:text="@{user.description}"
+            android:text="@{vm.user.description}"
             android:textColor="@color/color_999"
             android:textSize="@dimen/sp_12"
             app:layout_constraintLeft_toRightOf="@+id/avatar"
@@ -85,6 +89,7 @@
             android:layout_marginRight="@dimen/dp_10"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> proxy.goDetail()}"
             app:srcCompat="@drawable/ic_right_arrow"
             app:tint="@color/color_white" />
 
@@ -117,7 +122,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:lineSpacingMultiplier="1.3"
-                    android:text="@{StringConvert.convertSpannable(user.likeCount,@string/like_count)}"
+                    android:text="@{StringConvert.convertSpannable(vm.user.likeCount,@string/like_count)}"
                     android:textColor="@color/color_666"
                     tools:text="100\n获赞" />
 
@@ -128,7 +133,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:lineSpacingMultiplier="1.3"
-                    android:text="@{StringConvert.convertSpannable(user.followerCount,@string/fans_count)}"
+                    android:text="@{StringConvert.convertSpannable(vm.user.followerCount,@string/fans_count)}"
                     android:textColor="@color/color_666"
                     tools:text="100\n粉丝" />
 
@@ -140,7 +145,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:lineSpacingMultiplier="1.3"
-                    android:text="@{StringConvert.convertSpannable(user.followCount,@string/follow_count)}"
+                    android:text="@{StringConvert.convertSpannable(vm.user.followCount,@string/follow_count)}"
                     android:textColor="@color/color_666"
                     tools:text="100\n关注" />
 
@@ -152,7 +157,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:lineSpacingMultiplier="1.3"
-                    android:text="@{StringConvert.convertSpannable(user.score,@string/score_count)}"
+                    android:text="@{StringConvert.convertSpannable(vm.user.score,@string/score_count)}"
                     android:textColor="@color/color_666"
                     tools:text="1000\n粉丝" />
             </LinearLayout>
@@ -185,6 +190,7 @@
                     android:drawablePadding="@dimen/dp_5"
                     android:gravity="center"
                     android:text="@string/fragment_my_feed"
+                    android:onClick="@{() -> proxy.userFeed()}"
                     android:textColor="@color/color_333"
                     android:textSize="@dimen/sp_12" />
 
@@ -198,6 +204,7 @@
                     android:drawablePadding="@dimen/dp_5"
                     android:gravity="center"
                     android:text="@string/fragment_my_comment"
+                    android:onClick="@{() -> proxy.userComment()}"
                     android:textColor="@color/color_333"
                     android:textSize="@dimen/sp_12" />
 
@@ -211,6 +218,7 @@
                     android:drawablePadding="@dimen/dp_5"
                     android:gravity="center"
                     android:text="@string/fragment_my_favorite"
+                    android:onClick="@{() -> proxy.userFavorite()}"
                     android:textColor="@color/color_333"
                     android:textSize="@dimen/sp_12" />
 
@@ -224,6 +232,7 @@
                     android:drawablePadding="@dimen/dp_5"
                     android:gravity="center"
                     android:text="@string/fragment_my_history"
+                    android:onClick="@{() -> proxy.userHistory()}"
                     android:textColor="@color/color_333"
                     android:textSize="@dimen/sp_12" />
             </LinearLayout>

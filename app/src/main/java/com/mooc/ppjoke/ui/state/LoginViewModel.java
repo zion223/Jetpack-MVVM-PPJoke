@@ -1,4 +1,4 @@
-package com.mooc.ppjoke.ui.login;
+package com.mooc.ppjoke.ui.state;
 
 import androidx.lifecycle.ViewModel;
 

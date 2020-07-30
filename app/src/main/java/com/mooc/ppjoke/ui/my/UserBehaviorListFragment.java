@@ -13,6 +13,7 @@ import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 import com.mooc.ppjoke.model.Feed;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.home.FeedAdapter;
+import com.mooc.ppjoke.ui.state.UserBehaviorViewModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 public class UserBehaviorListFragment extends AbsListFragment<Feed, UserBehaviorViewModel> {

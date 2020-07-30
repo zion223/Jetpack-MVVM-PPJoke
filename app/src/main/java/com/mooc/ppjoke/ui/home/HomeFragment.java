@@ -17,6 +17,7 @@ import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 import com.mooc.ppjoke.model.Feed;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.MutablePageKeyedDataSource;
+import com.mooc.ppjoke.ui.state.HomeViewModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class HomeFragment extends AbsListFragment<Feed, HomeViewModel> {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mViewModel.getCacheLiveData().observe(this, new Observer<PagedList<Feed>>() {
+        mViewModel.getCacheLiveData().observe(getViewLifecycleOwner(), new Observer<PagedList<Feed>>() {
             @Override
             public void onChanged(PagedList<Feed> feeds) {
                 submitList(feeds);

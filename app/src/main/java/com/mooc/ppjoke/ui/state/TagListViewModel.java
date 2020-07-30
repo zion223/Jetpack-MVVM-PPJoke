@@ -1,9 +1,8 @@
-package com.mooc.ppjoke.ui.find;
+package com.mooc.ppjoke.ui.state;
 
 import androidx.annotation.NonNull;
 import androidx.arch.core.executor.ArchTaskExecutor;
 import androidx.lifecycle.MutableLiveData;
-import androidx.paging.DataSource;
 import androidx.paging.ItemKeyedDataSource;
 
 import com.alibaba.fastjson.TypeReference;

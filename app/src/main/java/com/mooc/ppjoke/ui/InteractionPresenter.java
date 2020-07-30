@@ -1,8 +1,6 @@
 package com.mooc.ppjoke.ui;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -14,7 +12,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.mooc.libcommon.extention.LiveDataBus;
 import com.mooc.libcommon.global.AppGlobals;
@@ -30,7 +27,6 @@ import com.mooc.ppjoke.ui.share.ShareDialog;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
 
 public class InteractionPresenter {
 

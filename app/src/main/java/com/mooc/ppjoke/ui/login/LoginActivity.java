@@ -1,8 +1,6 @@
 package com.mooc.ppjoke.ui.login;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -15,6 +13,7 @@ import com.mooc.libnetwork.JsonCallback;
 import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.model.User;
+import com.mooc.ppjoke.ui.state.LoginViewModel;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.connect.common.Constants;

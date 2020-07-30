@@ -14,6 +14,7 @@ import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.model.TagList;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.MutableItemKeyedDataSource;
+import com.mooc.ppjoke.ui.state.TagListViewModel;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.List;

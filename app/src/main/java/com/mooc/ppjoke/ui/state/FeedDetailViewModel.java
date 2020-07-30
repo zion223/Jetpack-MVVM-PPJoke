@@ -1,4 +1,4 @@
-package com.mooc.ppjoke.ui.detail;
+package com.mooc.ppjoke.ui.state;
 
 import androidx.annotation.NonNull;
 import androidx.paging.DataSource;

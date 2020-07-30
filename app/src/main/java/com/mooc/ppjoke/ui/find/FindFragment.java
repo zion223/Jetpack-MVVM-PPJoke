@@ -4,12 +4,12 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.mooc.libnavannotation.FragmentDestination;
 import com.mooc.ppjoke.model.SofaTab;
 import com.mooc.ppjoke.ui.sofa.SofaFragment;
+import com.mooc.ppjoke.ui.state.TagListViewModel;
 import com.mooc.ppjoke.utils.AppConfig;
 
 

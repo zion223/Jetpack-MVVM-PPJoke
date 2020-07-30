@@ -1,76 +1,94 @@
 package com.mooc.ppjoke.ui.my;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
+import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.mooc.libarchitecture.ui.page.BaseFragment;
 import com.mooc.libcommon.utils.StatusBar;
 import com.mooc.libnavannotation.FragmentDestination;
+import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.databinding.FragmentMyBinding;
 import com.mooc.ppjoke.model.User;
 import com.mooc.ppjoke.ui.login.UserManager;
+import com.mooc.ppjoke.ui.state.MyViewModel;
 
 @FragmentDestination(pageUrl = "main/tabs/my", needLogin = true)
-public class MyFragment extends Fragment {
-    private FragmentMyBinding mBinding;
+public class MyFragment extends BaseFragment {
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = FragmentMyBinding.inflate(inflater, container, false);
-        return mBinding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        User user = UserManager.get().getUser();
-        mBinding.setUser(user);
-
-        UserManager.get().refresh().observe(this, newUser -> {
-            if (newUser != null) {
-                mBinding.setUser(newUser);
-            }
-        });
-
-        mBinding.actionLogout.setOnClickListener(v -> new AlertDialog.Builder(getContext())
-                .setMessage(getString(R.string.fragment_my_logout))
-                .setPositiveButton(getString(R.string.fragment_my_logout_ok), (dialog, which) -> {
-                    dialog.dismiss();
-                    UserManager.get().logout();
-                    getActivity().onBackPressed();
-                }).setNegativeButton(getString(R.string.fragment_my_logout_cancel), null)
-                .create().show());
-
-        mBinding.goDetail.setOnClickListener(v -> ProfileActivity.startProfileActivity(getContext(), ProfileActivity.TAB_TYPE_ALL));
-        mBinding.userFeed.setOnClickListener(v -> ProfileActivity.startProfileActivity(getContext(), ProfileActivity.TAB_TYPE_FEED));
-        mBinding.userComment.setOnClickListener(v -> ProfileActivity.startProfileActivity(getContext(), ProfileActivity.TAB_TYPE_COMMENT));
-        mBinding.userFavorite.setOnClickListener(v -> UserBehaviorListActivity.startBehaviorListActivity(getContext(), UserBehaviorListActivity.BEHAVIOR_FAVORITE));
-        mBinding.userHistory.setOnClickListener(v -> UserBehaviorListActivity.startBehaviorListActivity(getContext(), UserBehaviorListActivity.BEHAVIOR_HISTORY));
-    }
+	private MyViewModel myViewModel;
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        StatusBar.lightStatusBar(getActivity(), false);
-        super.onCreate(savedInstanceState);
-    }
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		User user = UserManager.get().getUser();
+		myViewModel.user.setValue(user);
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        StatusBar.lightStatusBar(getActivity(), hidden);
-    }
+		UserManager.get().refresh().observe(getViewLifecycleOwner(), newUser -> {
+			if (newUser != null) {
+				myViewModel.user.setValue(newUser);
+			}
+		});
+	}
+
+
+	@Override
+	protected void initViewModel() {
+		myViewModel = getFragmentViewModel(MyViewModel.class);
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		StatusBar.lightStatusBar(getActivity(), false);
+		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected DataBindingConfig getDataBindingConfig() {
+		return new DataBindingConfig(R.layout.fragment_my, BR.vm, myViewModel);
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		StatusBar.lightStatusBar(getActivity(), hidden);
+	}
+
+	public class ClickProxy {
+		public void actionLogout() {
+			new AlertDialog.Builder(getContext())
+					.setMessage(getString(R.string.fragment_my_logout))
+					.setPositiveButton(getString(R.string.fragment_my_logout_ok), (dialog, which) -> {
+						dialog.dismiss();
+						UserManager.get().logout();
+						getActivity().onBackPressed();
+					}).setNegativeButton(getString(R.string.fragment_my_logout_cancel), null)
+					.create().show();
+		}
+
+		public void goDetail() {
+            ProfileActivity.startProfileActivity(getContext(), ProfileActivity.TAB_TYPE_ALL);
+		}
+
+		public void userFeed() {
+            ProfileActivity.startProfileActivity(getContext(), ProfileActivity.TAB_TYPE_FEED);
+		}
+
+		public void userComment() {
+            ProfileActivity.startProfileActivity(getContext(), ProfileActivity.TAB_TYPE_COMMENT);
+		}
+
+		public void userFavorite() {
+            UserBehaviorListActivity.startBehaviorListActivity(getContext(), UserBehaviorListActivity.BEHAVIOR_FAVORITE);
+		}
+
+		public void userHistory() {
+            UserBehaviorListActivity.startBehaviorListActivity(getContext(), UserBehaviorListActivity.BEHAVIOR_HISTORY);
+		}
+	}
 }

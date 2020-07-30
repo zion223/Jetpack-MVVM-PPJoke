@@ -4,7 +4,7 @@
 
         <variable
             name="vm"
-            type="com.mooc.ppjoke.ui.login.LoginViewModel" />
+            type="com.mooc.ppjoke.ui.state.LoginViewModel" />
         <variable
             name="proxy"
             type="com.mooc.ppjoke.ui.login.LoginActivity.ClickProxy" />
