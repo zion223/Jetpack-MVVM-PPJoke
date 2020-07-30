@@ -4,14 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 
-import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -22,45 +17,55 @@ import com.google.android.exoplayer2.upstream.DataSpec;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.FileDataSource;
 import com.google.android.exoplayer2.util.Util;
+import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.mooc.libarchitecture.ui.page.BaseActivity;
+import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.databinding.ActivityLayoutPreviewBinding;
+import com.mooc.ppjoke.ui.state.PreviewViewModel;
 
 import java.io.File;
 
-public class PreviewActivity extends AppCompatActivity implements View.OnClickListener {
-    private ActivityLayoutPreviewBinding mPreviewBinding;
+public class PreviewActivity extends BaseActivity {
+
+
+    private PreviewViewModel mPreviewViewModel;
+
     public static final String KEY_PREVIEW_URL = "preview_url";
     public static final String KEY_PREVIEW_VIDEO = "preview_video";
     public static final String KEY_PREVIEW_BTNTEXT = "preview_btntext";
     public static final int REQ_PREVIEW = 1000;
+    //TODO 与生命周期绑定
     private SimpleExoPlayer player;
 
     public static void startActivityForResult(Activity activity, String previewUrl, boolean isVideo, String btnText) {
         Intent intent = new Intent(activity, PreviewActivity.class);
         intent.putExtra(KEY_PREVIEW_URL, previewUrl);
         intent.putExtra(KEY_PREVIEW_VIDEO, isVideo);
+        //右上角按钮的文字
         intent.putExtra(KEY_PREVIEW_BTNTEXT, btnText);
         activity.startActivityForResult(intent, REQ_PREVIEW);
         activity.overridePendingTransition(0, 0);
     }
 
     @Override
+    protected void initViewModel() {
+        mPreviewViewModel = getActivityViewModel(PreviewViewModel.class);
+    }
+
+    @Override
+    protected DataBindingConfig getDataBindingConfig() {
+        return new DataBindingConfig(R.layout.activity_layout_preview, BR.vm, mPreviewViewModel)
+                .addBindingParam(BR.proxy, new ClickProxy());
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPreviewBinding = DataBindingUtil.setContentView(this, R.layout.activity_layout_preview);
         String previewUrl = getIntent().getStringExtra(KEY_PREVIEW_URL);
         boolean isVideo = getIntent().getBooleanExtra(KEY_PREVIEW_VIDEO, false);
         String btnText = getIntent().getStringExtra(KEY_PREVIEW_BTNTEXT);
-        if (TextUtils.isEmpty(btnText)) {
-            mPreviewBinding.actionOk.setVisibility(View.GONE);
-        } else {
-            mPreviewBinding.actionOk.setVisibility(View.VISIBLE);
-            mPreviewBinding.actionOk.setText(btnText);
-            mPreviewBinding.actionOk.setOnClickListener(this);
-        }
-
-        mPreviewBinding.actionClose.setOnClickListener(this);
-
+        mPreviewViewModel.btnText.set(btnText);
+        mPreviewViewModel.isVideo.set(isVideo);
         if (isVideo) {
             previewVideo(previewUrl);
         } else {
@@ -69,12 +74,10 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void previewImage(String previewUrl) {
-        mPreviewBinding.photoView.setVisibility(View.VISIBLE);
-        Glide.with(this).load(previewUrl).into(mPreviewBinding.photoView);
+        mPreviewViewModel.previewUrl.set(previewUrl);
     }
 
     private void previewVideo(String previewUrl) {
-        mPreviewBinding.playerView.setVisibility(View.VISIBLE);
         player = ExoPlayerFactory.newSimpleInstance(this, new DefaultRenderersFactory(this), new DefaultTrackSelector(), new DefaultLoadControl());
 
         Uri uri = null;
@@ -96,7 +99,7 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
         ProgressiveMediaSource mediaSource = factory.createMediaSource(uri);
         player.prepare(mediaSource);
         player.setPlayWhenReady(true);
-        mPreviewBinding.playerView.setPlayer(player);
+        mPreviewViewModel.player.set(player);
     }
 
 
@@ -126,13 +129,16 @@ public class PreviewActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.action_close) {
+    public class ClickProxy{
+
+        public void acionClose(){
             finish();
-        } else if (v.getId() == R.id.action_ok) {
+        }
+
+        public void actionOk(){
             setResult(RESULT_OK, new Intent());
             finish();
         }
     }
+
 }

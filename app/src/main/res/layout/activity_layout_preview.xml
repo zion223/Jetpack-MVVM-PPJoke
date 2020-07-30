@@ -3,7 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="vm"
+            type="com.mooc.ppjoke.ui.state.PreviewViewModel" />
+        <variable
+            name="view"
+            type="android.view.View" />
+        <variable
+            name="proxy"
+            type="com.mooc.ppjoke.ui.publish.PreviewActivity.ClickProxy" />
     </data>
 
     <FrameLayout
@@ -17,7 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone"
+            android:visibility="@{vm.isVideo ? view.VISIBLE : view.GONE}"
+            player="@{vm.player}"
             app:buffered_color="@color/color_theme"
             app:resize_mode="fixed_width"
             app:show_buffering="when_playing"
@@ -32,8 +41,9 @@
             android:layout_gravity="center"
             android:layout_marginTop="90dp"
             android:layout_marginBottom="@dimen/dp_60"
+            imageUrl="@{vm.previewUrl}"
             android:scaleType="fitCenter"
-            android:visibility="gone"/>
+            android:visibility="@{vm.isVideo ? view.GONE : view.VISIBLE}"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/action_close"
@@ -41,6 +51,7 @@
             android:layout_height="@dimen/dimen_20"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
+            android:onClick="@{() -> proxy.acionClose()}"
             app:srcCompat="@drawable/icon_close"
             app:tint="@color/color_white"/>
 
@@ -52,7 +63,9 @@
             android:layout_marginTop="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_16"
             android:gravity="center"
-            android:text="@string/preview_ok"
+            android:onClick="@{() -> proxy.actionOk()}"
+            android:visibility="@{vm.btnText == null ? view.GONE : view.VISIBLE}"
+            android:text="@{vm.btnText}"
             app:backgroundTint="@color/color_theme"
             app:cornerRadius="@dimen/dp_5"/>
     </FrameLayout>
