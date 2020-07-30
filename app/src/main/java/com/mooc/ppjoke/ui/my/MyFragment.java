@@ -50,7 +50,8 @@ public class MyFragment extends BaseFragment {
 
 	@Override
 	protected DataBindingConfig getDataBindingConfig() {
-		return new DataBindingConfig(R.layout.fragment_my, BR.vm, myViewModel);
+		return new DataBindingConfig(R.layout.fragment_my, BR.vm, myViewModel)
+				.addBindingParam(BR.proxy, new ClickProxy());
 	}
 
 	@Override

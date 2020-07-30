@@ -1,7 +1,5 @@
 package com.mooc.ppjoke.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
@@ -41,7 +39,7 @@ public class TagList extends BaseObservable implements Serializable {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        if (obj == null || !(obj instanceof TagList))
+        if (!(obj instanceof TagList))
             return false;
         TagList newOne = (TagList) obj;
         return id == newOne.id
