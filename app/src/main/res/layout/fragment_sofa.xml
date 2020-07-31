@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.mooc.ppjoke.ui.state.SofaViewModel" />
     </data>
 
     <LinearLayout
@@ -17,6 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
             app:tabGravity="center"
+            bindSofaFragment="@{vm.fragment}"
+            sofaTabConfig="@{vm.tabConfig}"
+            detach="@{vm.destroy}"
+            fragmentType="@{vm.type}"
             app:tabIndicatorColor="@color/color_theme"
             app:tabIndicatorFullWidth="false"
             app:tabIndicatorHeight="@dimen/dp_2"
