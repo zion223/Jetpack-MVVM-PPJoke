@@ -3,27 +3,23 @@ package com.mooc.ppjoke.ui.my;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
+import com.kunminx.architecture.ui.page.DataBindingConfig;
+import com.mooc.libarchitecture.ui.page.BaseActivity;
 import com.mooc.libcommon.utils.StatusBar;
+import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.databinding.ActivityLayoutProfileBinding;
 import com.mooc.ppjoke.model.User;
 import com.mooc.ppjoke.ui.login.UserManager;
+import com.mooc.ppjoke.ui.state.ProfileActivityViewModel;
 
-public class ProfileActivity extends AppCompatActivity {
-    private ActivityLayoutProfileBinding mBinding;
+//个人详情页
+public class ProfileActivity extends BaseActivity {
+
+    private ProfileActivityViewModel mProfileViewModel;
 
     public static final String TAB_TYPE_ALL = "tab_all";
     public static final String TAB_TYPE_FEED = "tab_feed";
@@ -38,85 +34,39 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void initViewModel() {
+        mProfileViewModel = getActivityViewModel(ProfileActivityViewModel.class);
+    }
+
+    @Override
+    protected DataBindingConfig getDataBindingConfig() {
+        return new DataBindingConfig(R.layout.activity_layout_profile, BR.vm, mProfileViewModel)
+                .addBindingParam(BR.proxy, new ClickProxy());
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         StatusBar.fitSystemBar(this);
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_layout_profile);
-
-
+        String initTab = getIntent().getStringExtra(KEY_TAB_TYPE);
         User user = UserManager.get().getUser();
-        mBinding.setUser(user);
-        mBinding.actionBack.setOnClickListener(v -> {
-            finish();
-        });
-
-
-        String[] tabs = getResources().getStringArray(R.array.profile_tabs);
-        ViewPager2 viewPager = mBinding.viewPager;
-        TabLayout tabLayout = mBinding.tabLayout;
-        viewPager.setAdapter(new FragmentStateAdapter(this) {
-            @NonNull
-            @Override
-            public Fragment createFragment(int position) {
-                return ProfileListFragment.newInstance(getTabTypeByPosition(position));
-            }
-
-            private String getTabTypeByPosition(int position) {
-                switch (position) {
-                    case 0:
-                        return TAB_TYPE_ALL;
-                    case 1:
-                        return TAB_TYPE_FEED;
-                    case 2:
-                        return TAB_TYPE_COMMENT;
-                }
-                return TAB_TYPE_ALL;
-            }
-
-            @Override
-            public int getItemCount() {
-                return tabs.length;
-            }
-        });
-
-        //autoRefresh:当我们调用viewpager的adaper#notifychangged方法的时候，要不要主动的把tablayout的选项卡给移除掉重新配置
-        //要在给viewpager设置adapter之后调用
-        new TabLayoutMediator(tabLayout, viewPager, false, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(tabs[position]);
-            }
-        }).attach();
-
-        int initTabPosition = getInitTabPosition();
-        if (initTabPosition != 0) {
-            viewPager.post(() -> {
-                viewPager.setCurrentItem(initTabPosition,false);
-            });
-        }
-
-
-        mBinding.appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                boolean expand = Math.abs(verticalOffset) < appBarLayout.getTotalScrollRange();
-                mBinding.setExpand(expand);
-            }
-        });
+        mProfileViewModel.user.set(user);
+        mProfileViewModel.activity.set(this);
+        mProfileViewModel.initTab.set(initTab);
     }
 
-    private int getInitTabPosition() {
-        String initTab = getIntent().getStringExtra(KEY_TAB_TYPE);
 
-        switch (initTab) {
-            case TAB_TYPE_ALL:
-                return 0;
-            case TAB_TYPE_FEED:
-                return 1;
-            case TAB_TYPE_COMMENT:
-                return 2;
-            default:
-                return 0;
+    public class ClickProxy{
+        public void finshActivity(){
+            finish();
+        }
+
+        //TODO 不生效
+        public AppBarLayout.OnOffsetChangedListener offsetChangeListener(){
+            return (appBarLayout, verticalOffset) -> {
+                boolean expand = Math.abs(verticalOffset) < appBarLayout.getTotalScrollRange();
+                mProfileViewModel.expand.set(expand);
+            };
         }
     }
 }
