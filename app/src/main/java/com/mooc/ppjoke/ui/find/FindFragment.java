@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.kunminx.architecture.ui.page.DataBindingConfig;
@@ -36,7 +37,6 @@ public class FindFragment extends BaseFragment {
         return new DataBindingConfig(R.layout.fragment_find, BR.vm, mFindViewModel);
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -54,9 +54,15 @@ public class FindFragment extends BaseFragment {
         if (TextUtils.equals(tagType, "onlyFollow")) {
             //跳转去推荐页面
             ViewModelProviders.of(childFragment).get(TagListViewModel.class)
-                    .getSwitchTabLiveData().observe(this,
-                    //object -> viewPager2.setCurrentItem(1));
-                    object -> mFindViewModel.currentItem.set(1));
+                    .getSwitchTabLiveData().observe(this, new Observer() {
+                @Override
+                public void onChanged(Object o) {
+                    //TODO  设置同样的值 BindingAdapter中的方法不会重复执行
+                    // 采用了笨方法 后续待改进
+                    mFindViewModel.currentItem.set(1);
+                    mFindViewModel.currentItem.set(2);
+                }
+            });
         }
     }
 

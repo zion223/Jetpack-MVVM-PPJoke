@@ -123,7 +123,7 @@ public class CommonBindingAdapter {
 			}
 		}
 		ViewPager2 viewPager2;
-		// 这里要区分两个不同的布局
+		// 这里要区分两个不同的布局!!!!!!
 		if (type == 0) {
 			viewPager2 = tabLayout.getRootView().findViewById(R.id.view_pager);
 		} else {
@@ -140,7 +140,7 @@ public class CommonBindingAdapter {
 				} else if (type == 1) {
 					return TagListFragment.newInstance(tabs.get(position).tag);
 				} else {
-					throw new IllegalArgumentException("can not parse fragmentType" + type);
+					throw new IllegalArgumentException("Can not parse fragmentType: " + type);
 				}
 			}
 
@@ -194,10 +194,9 @@ public class CommonBindingAdapter {
 		viewPager2.post(() -> viewPager2.setCurrentItem(tabConfig.select, false));
 	}
 
-	//TODO 不会重复执行
 	@BindingAdapter(value = {"currentItem"}, requireAll = false)
-	public static void bindCurrentItem(ViewPager2 viewPager2, int item) {
-		viewPager2.setCurrentItem(item);
+	public static void bindCurrentItem(ViewPager2 viewPager2, int currentItem) {
+		viewPager2.setCurrentItem(currentItem, true);
 	}
 
 }
