@@ -30,10 +30,10 @@
             android:layout_height="wrap_content"
             android:background="@color/color_white"
             android:divider="@drawable/list_divider_2px"
-            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             android:fitsSystemWindows="true"
+            android:showDividers="middle|end"
             app:statusBarForeground="@color/color_white"
-            android:showDividers="middle|end">
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
@@ -97,7 +97,7 @@
                             android:lineSpacingMultiplier="1.3"
                             android:text="@{StringConvert.convertSpannable(user.followerCount,@string/fans_count)}"
                             android:textColor="@color/color_666"
-                            tools:text="100\n粉丝"></TextView>
+                            tools:text="100\n粉丝" />
 
 
                         <TextView
@@ -109,7 +109,7 @@
                             android:lineSpacingMultiplier="1.3"
                             android:text="@{StringConvert.convertSpannable(user.followCount,@string/follow_count)}"
                             android:textColor="@color/color_666"
-                            tools:text="100\n关注"></TextView>
+                            tools:text="100\n关注" />
 
 
                         <TextView
@@ -121,7 +121,7 @@
                             android:lineSpacingMultiplier="1.3"
                             android:text="@{StringConvert.convertSpannable(user.score,@string/score_count)}"
                             android:textColor="@color/color_666"
-                            tools:text="1000\n粉丝"></TextView>
+                            tools:text="1000\n粉丝" />
                     </LinearLayout>
 
                     <TextView
@@ -134,7 +134,7 @@
                         android:textSize="@dimen/sp_12"
                         app:layout_constraintLeft_toRightOf="@id/author_avatar_large"
                         app:layout_constraintTop_toBottomOf="@+id/profile_info"
-                        tools:text="神秘的jetpack"></TextView>
+                        tools:text="神秘的jetpack" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.Toolbar
@@ -157,7 +157,7 @@
                             android:src="@drawable/icon_back_black"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <com.mooc.ppjoke.view.PPImageView
                             android:id="@+id/top_author_avatar"
@@ -170,7 +170,7 @@
                             app:isCircle="@{true}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toRightOf="@id/action_back"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/top_author_name"
@@ -185,7 +185,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toRightOf="@+id/top_author_avatar"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="神秘的jetpack"/>
+                            tools:text="神秘的jetpack" />
 
                         <TextView
                             android:id="@+id/top_author_name_large"
@@ -201,7 +201,7 @@
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:text="神秘的jetpack"/>
+                            tools:text="神秘的jetpack" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -215,13 +215,13 @@
                 app:tabIndicator="@null"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="@color/color_theme"
-                app:tabTextColor="@color/color_999"/>
+                app:tabTextColor="@color/color_999" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
