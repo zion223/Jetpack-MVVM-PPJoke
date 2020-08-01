@@ -5,19 +5,14 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
-import androidx.navigation.NavHostController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mooc.libcommon.utils.StatusBar;
-import com.mooc.libnavannotation.FragmentDestination;
 import com.mooc.ppjoke.model.Destination;
 import com.mooc.ppjoke.model.User;
 import com.mooc.ppjoke.ui.login.UserManager;
@@ -25,9 +20,7 @@ import com.mooc.ppjoke.utils.AppConfig;
 import com.mooc.ppjoke.utils.NavGraphBuilder;
 import com.mooc.ppjoke.view.AppBottomBar;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -41,51 +34,68 @@ import java.util.Map;
  */
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private NavController navController;
-    private AppBottomBar navView;
+	private NavController navController;
+	private AppBottomBar navView;
 
+	//防止启动LoginActivity时onNavigationItemSelected 回调方法被重复执行
+	private boolean logining = false;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        //由于 启动时设置了 R.style.launcher 的windowBackground属性
-        //势必要在进入主页后,把窗口背景清理掉
-        setTheme(R.style.AppTheme);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		//由于 启动时设置了 R.style.launcher 的windowBackground属性
+		//势必要在进入主页后,把窗口背景清理掉
+		setTheme(R.style.AppTheme);
 
-        //启用沉浸式布局，白底黑字
-        StatusBar.fitSystemBar(this);
-        super.onCreate(savedInstanceState);
+		//启用沉浸式布局，白底黑字
+		StatusBar.fitSystemBar(this);
+		super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         navView = findViewById(R.id.nav_view);
 
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        if(fragment != null){
-            navController = NavHostFragment.findNavController(fragment);
-            NavGraphBuilder.build(this, navController, fragment.getId());
-        }
+		Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+		if (fragment != null) {
+			navController = NavHostFragment.findNavController(fragment);
+			NavGraphBuilder.build(this, navController, fragment.getId());
+		}
 
-        navView.setOnNavigationItemSelectedListener(this);
+		navView.setOnNavigationItemSelectedListener(this);
 
-    }
+	}
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        HashMap<String, Destination> destConfig = AppConfig.getDestConfig();
-        //遍历 target destination 是否需要登录拦截
-        for (Map.Entry<String, Destination> entry : destConfig.entrySet()) {
-            Destination value = entry.getValue();
-            if (value != null && !UserManager.get().isLogin() && value.needLogin && value.id == menuItem.getItemId()) {
-                UserManager.get().login(this).observe(this, user -> navView.setSelectedItemId(menuItem.getItemId()));
-                return false;
-            }
-        }
 
-        navController.navigate(menuItem.getItemId());
-        return !TextUtils.isEmpty(menuItem.getTitle());
-    }
+	//在onNavigationItemSelected回调中 启动Activity会导致此方法的重复回调执行  天坑!!!!!!!
+	@Override
+	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-    @Override
-    public void onBackPressed() {
+
+		HashMap<String, Destination> destConfig = AppConfig.getDestConfig();
+		//遍历 target destination 是否需要登录拦截
+		for (Map.Entry<String, Destination> entry : destConfig.entrySet()) {
+			Destination value = entry.getValue();
+			if (logining) {
+				return false;
+			} else {
+				if (value != null && !UserManager.get().isLogin() && value.needLogin && value.id == menuItem.getItemId()) {
+					logining = true;
+					UserManager.get().login(this).observe(this, new Observer<User>() {
+						@Override
+						public void onChanged(User user) {
+							navView.setSelectedItemId(menuItem.getItemId());
+							logining = false;
+						}
+					});
+					return false;
+				}
+			}
+
+		}
+		navController.navigate(menuItem.getItemId());
+		return !TextUtils.isEmpty(menuItem.getTitle());
+	}
+
+	@Override
+	public void onBackPressed() {
 //        boolean shouldIntercept = false;
 //        int homeDestinationId = 0;
 //

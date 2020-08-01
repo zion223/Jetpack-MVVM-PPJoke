@@ -1,21 +1,16 @@
 package com.mooc.ppjoke.domain.request;
 
 import android.app.Activity;
-import android.widget.Toast;
 
-import androidx.databinding.ObservableBoolean;
-import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mooc.libarchitecture.data.repository.DataResult;
 import com.mooc.libarchitecture.domain.request.BaseRequest;
 import com.mooc.libarchitecture.utils.Utils;
 import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
 import com.mooc.ppjoke.model.User;
-import com.mooc.ppjoke.ui.login.LoginActivity;
 import com.mooc.ppjoke.ui.login.UserManager;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
@@ -125,30 +120,15 @@ public class LoginRequest extends BaseRequest {
 					public void onSuccess(ApiResponse<User> response) {
 						if (response.body != null) {
 							UserManager.get().save(response.body);
-							//finish();
 							loginStatus.postValue(true);
 						} else {
 							loginMessage.postValue("登录失败");
-
-//							runOnUiThread(new Runnable() {
-//								@Override
-//								public void run() {
-//									Toast.makeText(getApplicationContext(), "登陆失败", Toast.LENGTH_SHORT).show();
-//								}
-//							});
 						}
 					}
 
 					@Override
 					public void onError(ApiResponse<User> response) {
 						loginMessage.postValue("登录失败");
-
-//						runOnUiThread(new Runnable() {
-//							@Override
-//							public void run() {
-//								Toast.makeText(getApplicationContext(), "登陆失败,msg:" + response.message, Toast.LENGTH_SHORT).show();
-//							}
-//						});
 					}
 				});
 	}
