@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.REQUEST_LOGIN) {
-            Tencent.onActivityResultData(requestCode, resultCode, data, mLoginViewModel.loginRequest.createListener(mLoginViewModel.loginRequest.tencent));
+            Tencent.onActivityResultData(requestCode, resultCode, data, mLoginViewModel.loginRequest.listener);
         }
     }
 }

@@ -23,10 +23,12 @@ import org.json.JSONObject;
 
 public class LoginRequest extends BaseRequest {
 
-	public final Tencent tencent = Tencent.createInstance("101794421", Utils.getApp());
 
 	public MutableLiveData<Boolean> loginStatus;
 	public MutableLiveData<String> loginMessage;
+
+	public final Tencent tencent = Tencent.createInstance("101794421", Utils.getApp());
+
 
 	public LiveData<Boolean> getLoginStatus() {
 		if (loginStatus == null) {
@@ -44,22 +46,21 @@ public class LoginRequest extends BaseRequest {
 
 	public void requestLogin(Activity activity) {
 
-		tencent.login(activity, "all", createListener(tencent));
+		tencent.login(activity, "all", listener);
 	}
 
 
-	public IUiListener createListener(Tencent tencent) {
-		return new IUiListener() {
-			@Override
-			public void onComplete(Object o) {
-				JSONObject response = (JSONObject) o;
-				try {
-					String openid = response.getString("openid");
-					String access_token = response.getString("access_token");
-					String expires_in = response.getString("expires_in");
-					long expires_time = response.getLong("expires_time");
+	public IUiListener listener = new IUiListener() {
+		@Override
+		public void onComplete(Object o) {
+			JSONObject response = (JSONObject) o;
+			try {
+				String openid = response.getString("openid");
+				String access_token = response.getString("access_token");
+				String expires_in = response.getString("expires_in");
+				long expires_time = response.getLong("expires_time");
 
-					tencent.setOpenId(openid);
+				tencent.setOpenId(openid);
 					tencent.setAccessToken(access_token, expires_in);
 					QQToken qqToken = tencent.getQQToken();
 					getUserInfo(qqToken, expires_time, openid);
@@ -78,7 +79,7 @@ public class LoginRequest extends BaseRequest {
 				loginMessage.postValue("登录取消");
 			}
 		};
-	}
+
 
 	private void getUserInfo(QQToken qqToken, long expires_time, String openid) {
 		UserInfo userInfo = new UserInfo(Utils.getApp(), qqToken);
