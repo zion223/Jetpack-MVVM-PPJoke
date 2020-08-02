@@ -19,6 +19,7 @@ public class PublishViewModel extends ViewModel {
 	public ObservableField<String> inputText = new ObservableField<>();
 
 	{
+		isVideo.set(false);
 		addTagText.set(Utils.getApp().getResources().getString(R.string.publish_add_tag));
 	}
 }

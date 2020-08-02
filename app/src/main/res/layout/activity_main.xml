@@ -6,7 +6,8 @@
     android:layout_height="match_parent">
 
 
-    <fragment
+    <!-- FragmentLayoutInflaterFactory "Fragment " + fname + " did not create a view." -->
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="com.mooc.libcommon.view.WindowInsetsNavHostFragment"
         android:layout_width="match_parent"

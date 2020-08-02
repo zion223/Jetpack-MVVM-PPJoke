@@ -5,7 +5,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -48,7 +48,7 @@ dependencies {
 
 
     //或者指明使用viewmodel
-    compileOnly "androidx.lifecycle:lifecycle-viewmodel:2.1.0"
+    //api "androidx.lifecycle:lifecycle-viewmodel:2.1.0"
     //或者指明使用livedata
     //api 'androidx.lifecycle:lifecycle-livedata:2.1.0'
     //api 'androidx.lifecycle:lifecycle-livedata-core:2.1.0'
@@ -102,8 +102,5 @@ dependencies {
     //fastjson解析
     api 'com.alibaba:fastjson:1.2.59'
 
-    compileOnly 'com.kunminx.archi:unpeek-livedata:3.2.2-beta8'
     compileOnly 'com.kunminx.archi:smooth-navigation:2.9.7-beta4'
-    compileOnly 'com.kunminx.archi:strict-databinding:3.0.2-beta1'
-    implementation 'com.kunminx.archi:binding-recyclerview:3.0.2-beta2'
 }

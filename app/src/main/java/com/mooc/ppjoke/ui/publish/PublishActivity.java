@@ -196,7 +196,7 @@ public class PublishActivity extends BaseActivity{
 				.addParam("userId", UserManager.get().getUserId())
 				.addParam("tagId", mTagList == null ? 0 : mTagList.tagId)
 				.addParam("tagTitle", mTagList == null ? "" : mTagList.title)
-				.addParam("feedText", mPublishViewModel.inputText)
+				.addParam("feedText", mPublishViewModel.inputText.get())
 				.addParam("feedType", mPublishViewModel.isVideo.get() ? Feed.TYPE_VIDEO : Feed.TYPE_IMAGE_TEXT)
 				.execute(new JsonCallback<JSONObject>() {
 					@Override
