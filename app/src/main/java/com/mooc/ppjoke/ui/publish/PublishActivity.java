@@ -1,12 +1,10 @@
 package com.mooc.ppjoke.ui.publish;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -17,21 +15,15 @@ import androidx.work.WorkContinuation;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
-import com.alibaba.fastjson.JSONObject;
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.mooc.libarchitecture.ui.page.BaseActivity;
 import com.mooc.libcommon.dialog.LoadingDialog;
 import com.mooc.libcommon.utils.FileUtils;
 import com.mooc.libcommon.utils.StatusBar;
 import com.mooc.libnavannotation.ActivityDestination;
-import com.mooc.libnetwork.ApiResponse;
-import com.mooc.libnetwork.ApiService;
-import com.mooc.libnetwork.JsonCallback;
 import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.Feed;
 import com.mooc.ppjoke.model.TagList;
-import com.mooc.ppjoke.ui.login.UserManager;
 import com.mooc.ppjoke.ui.state.PublishViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -66,6 +58,14 @@ public class PublishActivity extends BaseActivity{
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		StatusBar.fitSystemBar(this);
 		super.onCreate(savedInstanceState);
+		//发布状态
+		mPublishViewModel.publishRequest.getPublishMessage().observe(this, this::showShortToast);
+		mPublishViewModel.publishRequest.getPublishStatus().observe(this, status -> {
+			dismissLoading();
+			if (status) {
+				finish();
+			}
+		});
 	}
 
 
@@ -91,13 +91,10 @@ public class PublishActivity extends BaseActivity{
 		//添加标签
 		public void actionAddTag() {
 			TagBottomSheetDialogFragment fragment = new TagBottomSheetDialogFragment();
-			fragment.setOnTagItemSelectedListener(new TagBottomSheetDialogFragment.OnTagItemSelectedListener() {
-				@Override
-				public void onTagItemSelected(TagList tagList) {
-					//设置  标签 标题
-					mTagList = tagList;
-                    mPublishViewModel.addTagText.set(tagList.title);
-				}
+			fragment.setOnTagItemSelectedListener(tagList -> {
+				//设置  标签 标题
+				mTagList = tagList;
+				mPublishViewModel.addTagText.set(tagList.title);
 			});
 			fragment.show(getSupportFragmentManager(), "tag_dialog");
 		}
@@ -141,7 +138,7 @@ public class PublishActivity extends BaseActivity{
 				enqueue(workRequests);
 			}
 		} else {
-			publishFeed();
+			mPublishViewModel.publishRequest.requestPublish(coverUploadUrl, fileUploadUrl, width, height, mTagList, mPublishViewModel.inputText.get(), mPublishViewModel.isVideo.get());
 		}
 	}
 
@@ -179,39 +176,12 @@ public class PublishActivity extends BaseActivity{
 				}
 
 				if (completedCount >= workInfos.size()) {
-					publishFeed();
+					mPublishViewModel.publishRequest.requestPublish(coverUploadUrl, fileUploadUrl, width, height, mTagList, mPublishViewModel.inputText.get(), mPublishViewModel.isVideo.get());
 				} else if (failedCount > 0) {
 					dismissLoading();
 				}
 			}
 		});
-	}
-
-	private void publishFeed() {
-		ApiService.post("/feeds/publish")
-				.addParam("coverUrl", coverUploadUrl)
-				.addParam("fileUrl", fileUploadUrl)
-				.addParam("fileWidth", width)
-				.addParam("fileHeight", height)
-				.addParam("userId", UserManager.get().getUserId())
-				.addParam("tagId", mTagList == null ? 0 : mTagList.tagId)
-				.addParam("tagTitle", mTagList == null ? "" : mTagList.title)
-				.addParam("feedText", mPublishViewModel.inputText.get())
-				.addParam("feedType", mPublishViewModel.isVideo.get() ? Feed.TYPE_VIDEO : Feed.TYPE_IMAGE_TEXT)
-				.execute(new JsonCallback<JSONObject>() {
-					@Override
-					public void onSuccess(ApiResponse<JSONObject> response) {
-						showShortToast(getString(R.string.feed_publisj_success));
-						PublishActivity.this.finish();
-						dismissLoading();
-					}
-
-					@Override
-					public void onError(ApiResponse<JSONObject> response) {
-						showShortToast(response.message);
-						dismissLoading();
-					}
-				});
 	}
 
 	private LoadingDialog mLoadingDialog = null;
@@ -313,12 +283,9 @@ public class PublishActivity extends BaseActivity{
 		new AlertDialog.Builder(this)
 				.setMessage(getString(R.string.publish_exit_message))
 				.setNegativeButton(getString(R.string.publish_exit_action_cancel), null)
-				.setPositiveButton(getString(R.string.publish_exit_action_ok), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						PublishActivity.this.finish();
-					}
+				.setPositiveButton(getString(R.string.publish_exit_action_ok), (dialog, which) -> {
+					dialog.dismiss();
+					PublishActivity.this.finish();
 				}).create().show();
 	}
 }

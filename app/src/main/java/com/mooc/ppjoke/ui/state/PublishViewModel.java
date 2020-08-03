@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.mooc.libarchitecture.utils.Utils;
 import com.mooc.ppjoke.R;
+import com.mooc.ppjoke.domain.request.PublishRequest;
 
 public class PublishViewModel extends ViewModel {
 
@@ -17,6 +18,8 @@ public class PublishViewModel extends ViewModel {
 	public ObservableField<String> addTagText = new ObservableField<>();
 	//发布内容 双向绑定
 	public ObservableField<String> inputText = new ObservableField<>();
+
+	public final PublishRequest publishRequest = new PublishRequest();
 
 	{
 		isVideo.set(false);
