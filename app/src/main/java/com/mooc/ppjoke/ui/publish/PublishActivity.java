@@ -162,9 +162,9 @@ public class PublishActivity extends BaseActivity{
 					if (state == WorkInfo.State.FAILED) {
 						// if (uuid==coverUploadUUID)是错的
 						if (uuid.equals(coverUploadUUID)) {
-							showToast(getString(R.string.file_upload_cover_message));
+							showShortToast(getString(R.string.file_upload_cover_message));
 						} else if (uuid.equals(fileUploadUUID)) {
-							showToast(getString(R.string.file_upload_original_message));
+							showShortToast(getString(R.string.file_upload_original_message));
 						}
 						failedCount++;
 					} else if (state == WorkInfo.State.SUCCEEDED) {
@@ -201,14 +201,14 @@ public class PublishActivity extends BaseActivity{
 				.execute(new JsonCallback<JSONObject>() {
 					@Override
 					public void onSuccess(ApiResponse<JSONObject> response) {
-						showToast(getString(R.string.feed_publisj_success));
+						showShortToast(getString(R.string.feed_publisj_success));
 						PublishActivity.this.finish();
 						dismissLoading();
 					}
 
 					@Override
 					public void onError(ApiResponse<JSONObject> response) {
-						showToast(response.message);
+						showShortToast(response.message);
 						dismissLoading();
 					}
 				});
@@ -233,19 +233,6 @@ public class PublishActivity extends BaseActivity{
 			runOnUiThread(() -> {
 				if (mLoadingDialog != null) {
 					mLoadingDialog.dismiss();
-				}
-			});
-		}
-	}
-
-	private void showToast(String message) {
-		if (Looper.myLooper() == Looper.getMainLooper()) {
-			Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-		} else {
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(PublishActivity.this, message, Toast.LENGTH_SHORT).show();
 				}
 			});
 		}
