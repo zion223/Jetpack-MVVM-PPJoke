@@ -21,6 +21,7 @@ public class UserManager {
     private MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private User mUser;
 
+    //必须 单例模式
     public static UserManager get() {
         return mUserManager;
     }
@@ -33,10 +34,16 @@ public class UserManager {
     }
 
     public void save(User user) {
-        mUser = user;
-        CacheManager.save(KEY_CACHE_USER, user);
-        if (userLiveData.hasObservers()) {
-            userLiveData.postValue(user);
+        if (user != null) {
+            mUser = user;
+            CacheManager.save(KEY_CACHE_USER, user);
+            if (userLiveData.hasObservers()) {
+                userLiveData.postValue(user);
+            }
+        } else {
+            if (userLiveData.hasObservers()) {
+                userLiveData.postValue(null);
+            }
         }
     }
 

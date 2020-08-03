@@ -61,24 +61,26 @@ public class LoginRequest extends BaseRequest {
 				long expires_time = response.getLong("expires_time");
 
 				tencent.setOpenId(openid);
-					tencent.setAccessToken(access_token, expires_in);
-					QQToken qqToken = tencent.getQQToken();
-					getUserInfo(qqToken, expires_time, openid);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				tencent.setAccessToken(access_token, expires_in);
+				QQToken qqToken = tencent.getQQToken();
+				getUserInfo(qqToken, expires_time, openid);
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
+		}
 
-			@Override
-			public void onError(UiError uiError) {
-				loginMessage.postValue("登录失败:reason" + uiError.toString());
-			}
+		@Override
+		public void onError(UiError uiError) {
+			UserManager.get().save(null);
+			loginMessage.postValue("登录失败:reason" + uiError.toString());
+		}
 
-			@Override
-			public void onCancel() {
-				loginMessage.postValue("登录取消");
-			}
-		};
+		@Override
+		public void onCancel() {
+			UserManager.get().save(null);
+			loginMessage.postValue("登录取消");
+		}
+	};
 
 
 	private void getUserInfo(QQToken qqToken, long expires_time, String openid) {
@@ -100,11 +102,13 @@ public class LoginRequest extends BaseRequest {
 
 			@Override
 			public void onError(UiError uiError) {
+				UserManager.get().save(null);
 				loginMessage.postValue("登录失败:reason" + uiError.toString());
 			}
 
 			@Override
 			public void onCancel() {
+				UserManager.get().save(null);
 				loginMessage.postValue("登录取消");
 			}
 		});
@@ -124,12 +128,14 @@ public class LoginRequest extends BaseRequest {
 							loginStatus.postValue(true);
 						} else {
 							loginMessage.postValue("登录失败");
+							UserManager.get().save(null);
 						}
 					}
 
 					@Override
 					public void onError(ApiResponse<User> response) {
 						loginMessage.postValue("登录失败");
+						UserManager.get().save(null);
 					}
 				});
 	}

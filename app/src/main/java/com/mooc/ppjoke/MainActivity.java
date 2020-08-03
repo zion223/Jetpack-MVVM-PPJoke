@@ -2,19 +2,18 @@ package com.mooc.ppjoke;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mooc.libcommon.utils.StatusBar;
 import com.mooc.ppjoke.model.Destination;
-import com.mooc.ppjoke.model.User;
 import com.mooc.ppjoke.ui.login.UserManager;
 import com.mooc.ppjoke.utils.AppConfig;
 import com.mooc.ppjoke.utils.NavGraphBuilder;
@@ -50,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 		StatusBar.fitSystemBar(this);
 		super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        navView = findViewById(R.id.nav_view);
+		setContentView(R.layout.activity_main);
+		navView = findViewById(R.id.nav_view);
 
 		Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
 		if (fragment != null) {
@@ -68,28 +67,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-
 		HashMap<String, Destination> destConfig = AppConfig.getDestConfig();
 		//遍历 target destination 是否需要登录拦截
 		for (Map.Entry<String, Destination> entry : destConfig.entrySet()) {
 			Destination value = entry.getValue();
 			if (logining) {
 				return false;
-			} else {
-				if (value != null && !UserManager.get().isLogin() && value.needLogin && value.id == menuItem.getItemId()) {
-					logining = true;
-					UserManager.get().login(this).observe(this, new Observer<User>() {
-						@Override
-						public void onChanged(User user) {
-							navView.setSelectedItemId(menuItem.getItemId());
-							logining = false;
-						}
-					});
-					return false;
-				}
+			} else if (value != null && !UserManager.get().isLogin() && value.needLogin && value.id == menuItem.getItemId()) {
+				logining = true;
+				UserManager.get().login(this).observe(this, user -> {
+					if (user != null) {
+						navView.setSelectedItemId(menuItem.getItemId());
+					}
+					logining = false;
+				});
+
+				return false;
 			}
 
 		}
+
 		navController.navigate(menuItem.getItemId());
 		return !TextUtils.isEmpty(menuItem.getTitle());
 	}
@@ -123,19 +120,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 //        }
 //        super.onBackPressed();
 
-        //当前正在显示的页面destinationId
-        int currentPageId = navController.getCurrentDestination().getId();
+		//当前正在显示的页面destinationId
+		int currentPageId = navController.getCurrentDestination().getId();
 
-        //APP页面路导航结构图  首页的destinationId
-        int homeDestId = navController.getGraph().getStartDestination();
+		//APP页面路导航结构图  首页的destinationId
+		int homeDestId = navController.getGraph().getStartDestination();
 
-        //如果当前正在显示的页面不是首页，而我们点击了返回键，则拦截。
-        if (currentPageId != homeDestId) {
-            navView.setSelectedItemId(homeDestId);
-            return;
-        }
+		//如果当前正在显示的页面不是首页，而我们点击了返回键，则拦截。
+		if (currentPageId != homeDestId) {
+			navView.setSelectedItemId(homeDestId);
+			return;
+		}
 
-        //否则 finish，此处不宜调用onBackPressed。因为navigation会操作回退栈,切换到之前显示的页面。
-        finish();
-    }
+		//否则 finish，此处不宜调用onBackPressed。因为navigation会操作回退栈,切换到之前显示的页面。
+		finish();
+	}
 }

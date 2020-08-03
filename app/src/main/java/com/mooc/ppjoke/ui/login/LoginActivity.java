@@ -50,6 +50,7 @@ public class LoginActivity extends BaseActivity {
         }
 
         public void finishActivity() {
+            UserManager.get().save(null);
             finish();
         }
     }
