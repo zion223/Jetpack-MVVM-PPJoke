@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 	private NavController navController;
 	private AppBottomBar navView;
 
-	//防止启动LoginActivity时onNavigationItemSelected 回调方法被重复执行
-	private boolean logining = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,30 +61,25 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 	}
 
 
-	//在onNavigationItemSelected回调中 启动Activity会导致此方法的重复回调执行  天坑!!!!!!!
 	@Override
 	public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
 		HashMap<String, Destination> destConfig = AppConfig.getDestConfig();
 		//遍历 target destination 是否需要登录拦截
 		for (Map.Entry<String, Destination> entry : destConfig.entrySet()) {
 			Destination value = entry.getValue();
-			if (logining) {
-				return false;
-			} else if (value != null && !UserManager.get().isLogin() && value.needLogin && value.id == menuItem.getItemId()) {
-				logining = true;
+			if (value != null && !UserManager.get().isLogin() && value.needLogin && value.id == menuItem.getItemId()) {
+
 				UserManager.get().login(this).observe(this, user -> {
 					if (user != null) {
+						//即时移除observers  避免重复收到LiveData消息
+						UserManager.get().getUserLiveData().removeObservers(MainActivity.this);
 						navView.setSelectedItemId(menuItem.getItemId());
 					}
-					logining = false;
 				});
-
 				return false;
 			}
 
 		}
-
 		navController.navigate(menuItem.getItemId());
 		return !TextUtils.isEmpty(menuItem.getTitle());
 	}

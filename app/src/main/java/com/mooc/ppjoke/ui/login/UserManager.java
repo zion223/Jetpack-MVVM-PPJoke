@@ -47,6 +47,10 @@ public class UserManager {
         }
     }
 
+    public MutableLiveData<User> getUserLiveData() {
+        return userLiveData;
+    }
+
     public LiveData<User> login(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -98,6 +102,7 @@ public class UserManager {
 
     public void logout() {
         CacheManager.delete(KEY_CACHE_USER, mUser);
+        userLiveData.setValue(null);
         mUser = null;
     }
 }

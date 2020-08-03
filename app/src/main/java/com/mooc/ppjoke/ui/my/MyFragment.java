@@ -29,11 +29,11 @@ public class MyFragment extends BaseFragment {
 		User user = UserManager.get().getUser();
 		myViewModel.user.setValue(user);
 
-		UserManager.get().refresh().observe(getViewLifecycleOwner(), newUser -> {
-			if (newUser != null) {
-				myViewModel.user.setValue(newUser);
-			}
-		});
+//		UserManager.get().refresh().observe(getViewLifecycleOwner(), newUser -> {
+//			if (newUser != null) {
+//				myViewModel.user.setValue(newUser);
+//			}
+//		});
 	}
 
 
