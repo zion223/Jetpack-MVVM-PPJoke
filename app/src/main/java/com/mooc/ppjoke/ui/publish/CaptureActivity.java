@@ -23,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.ArchTaskExecutor;
 import androidx.camera.core.CameraInfoUnavailableException;
 import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageCapture;
@@ -35,7 +34,6 @@ import androidx.camera.core.VideoCapture;
 import androidx.camera.core.VideoCaptureConfig;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentActivity;
 
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.databinding.ActivityLayoutCaptureBinding;
@@ -47,7 +45,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class CaptureActivity extends AppCompatActivity {
     public static final int REQ_CAPTURE = 10001;

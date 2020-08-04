@@ -71,14 +71,14 @@
                 android:paddingLeft="@dimen/sp_10"
                 android:textColor="@color/color_333"
                 android:textColorHint="@color/color_999"
-                android:textSize="@dimen/sp_12"></com.mooc.libcommon.view.PPEditTextView>
+                android:textSize="@dimen/sp_12" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/comment_video"
                 android:layout_width="@dimen/dp_36"
                 android:layout_height="@dimen/dp_36"
                 android:layout_marginLeft="@dimen/dp_5"
-                android:src="@drawable/icon_publish_video"></androidx.appcompat.widget.AppCompatImageView>
+                android:src="@drawable/icon_publish_video" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/comment_send"
@@ -93,7 +93,7 @@
                 android:text="@string/comment_send_text"
                 android:textColorHint="@color/color_white"
                 app:backgroundTint="@color/color_theme"
-                app:cornerRadius="@dimen/dp_6"></com.google.android.material.button.MaterialButton>
+                app:cornerRadius="@dimen/dp_6" />
         </LinearLayout>
     </LinearLayout>
 </layout>
