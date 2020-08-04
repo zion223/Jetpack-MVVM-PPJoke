@@ -1,11 +1,16 @@
 package com.mooc.ppjoke.ui.binding_adpter;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.databinding.BindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -19,6 +24,7 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.mooc.libarchitecture.utils.ClickUtils;
 import com.mooc.libarchitecture.utils.Utils;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.model.SofaTab;
@@ -199,4 +205,31 @@ public class CommonBindingAdapter {
 		viewPager2.setCurrentItem(currentItem, true);
 	}
 
+
+	@BindingAdapter(value = {"onClickWithDebouncing"}, requireAll = false)
+	public static void onClickWithDebouncing(View view, View.OnClickListener clickListener) {
+		ClickUtils.applySingleDebouncing(view, clickListener);
+	}
+
+	@BindingAdapter(value = "showSoftInputMethod")
+	public static void showSoftInputMethod(AppCompatEditText editText, boolean show) {
+		if (show) {
+			editText.setFocusable(true);
+			editText.setFocusableInTouchMode(true);
+			//请求获得焦点
+			editText.requestFocus();
+			InputMethodManager manager = (InputMethodManager) Utils.getApp().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+			manager.showSoftInput(editText, 0);
+		}
+	}
+
+	@BindingAdapter(value = {"alpha"}, requireAll = false)
+	public static void setImageRes(ImageView imageView, int alpha) {
+		imageView.setAlpha(alpha);
+	}
+
+	@BindingAdapter(value = {"enabled"}, requireAll = false)
+	public static void setImageRes(ImageView imageView, boolean enabled) {
+		imageView.setEnabled(enabled);
+	}
 }

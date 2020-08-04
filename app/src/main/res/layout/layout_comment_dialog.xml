@@ -4,6 +4,15 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.mooc.ppjoke.ui.state.CommentViewModel" />
+
+        <variable
+            name="proxy"
+            type="com.mooc.ppjoke.ui.detail.CommentDialog.ClickProxy" />
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -21,12 +30,13 @@
             android:layout_marginLeft="@dimen/dimen_10"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_marginBottom="@dimen/dp_5"
-            android:visibility="gone">
+            android:visibility="@{vm.filePath == null ? View.GONE : View.VISIBLE}">
 
             <com.mooc.ppjoke.view.PPImageView
                 android:id="@+id/comment_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                image_url="@{vm.filePath}"
                 android:scaleType="centerCrop" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -35,7 +45,7 @@
                 android:layout_height="@dimen/dimen_20"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_video_play"
-                android:visibility="gone" />
+                android:visibility="@{vm.isVideo ? View.VISIBLE : View.GONE}" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/comment_delete"
@@ -43,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|top"
                 android:paddingLeft="@dimen/dp_3"
+                onClickWithDebouncing="@{() -> proxy.delete()}"
                 app:srcCompat="@drawable/icon_close"
                 app:tint="@color/color_white" />
         </FrameLayout>
@@ -67,6 +78,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_edit_view"
                 android:gravity="center_vertical"
+                showSoftInputMethod="@{vm.showSoftInput}"
+
+                android:text="@={vm.commentText}"
                 android:hint="@string/comment_hint"
                 android:paddingLeft="@dimen/sp_10"
                 android:textColor="@color/color_333"
@@ -78,6 +92,9 @@
                 android:layout_width="@dimen/dp_36"
                 android:layout_height="@dimen/dp_36"
                 android:layout_marginLeft="@dimen/dp_5"
+                enabled="@{vm.filePath == null ? Boolean.TRUE : Boolean.FALSE}"
+                alpha="@{vm.commentVideoImageAlpha}"
+                onClickWithDebouncing="@{() -> proxy.video()}"
                 android:src="@drawable/icon_publish_video" />
 
             <com.google.android.material.button.MaterialButton
@@ -85,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_10"
+                onClickWithDebouncing="@{() -> proxy.send()}"
                 android:gravity="center"
                 android:paddingLeft="@dimen/dp_11"
                 android:paddingTop="@dimen/dp_3"

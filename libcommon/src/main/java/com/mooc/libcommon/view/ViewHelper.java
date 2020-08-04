@@ -9,7 +9,6 @@ import android.view.ViewOutlineProvider;
 
 import com.mooc.libcommon.R;
 
-import java.util.jar.Attributes;
 
 public class ViewHelper {
 
