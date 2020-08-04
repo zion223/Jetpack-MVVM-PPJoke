@@ -74,7 +74,7 @@ public abstract class DialogDataBindingFragment extends AppCompatDialogFragment 
 		// 如此，视图刷新的安全性将和基于函数式编程的 Jetpack Compose 持平。
 
 		// 如果这样说还不理解的话，详见 https://xiaozhuanlan.com/topic/9816742350 和 https://xiaozhuanlan.com/topic/2356748910
-		// TODO 这里不一样
+		// TODO tip 设置DialogFragment的Window属性
 		Window window = getDialog().getWindow();
 		window.setWindowAnimations(0);
 		ViewDataBinding binding = DataBindingUtil.inflate(inflater, dataBindingConfig.getLayout(), ((ViewGroup) window.findViewById(android.R.id.content)), false);
@@ -90,12 +90,7 @@ public abstract class DialogDataBindingFragment extends AppCompatDialogFragment 
 		for (int i = 0, length = bindingParams.size(); i < length; i++) {
 			binding.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i));
 		}
-		binding.getRoot().post(new Runnable() {
-			@Override
-			public void run() {
-				postMethod();
-			}
-		});
+		binding.getRoot().post(this::postMethod);
 		return binding.getRoot();
 	}
 

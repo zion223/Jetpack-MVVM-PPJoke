@@ -9,21 +9,16 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.arch.core.executor.ArchTaskExecutor;
-import androidx.lifecycle.Observer;
 
 import com.kunminx.architecture.ui.page.DataBindingConfig;
 import com.mooc.libcommon.dialog.LoadingDialog;
 import com.mooc.libcommon.global.AppGlobals;
 import com.mooc.libcommon.utils.FileUploadManager;
 import com.mooc.libcommon.utils.FileUtils;
-import com.mooc.libnetwork.ApiResponse;
-import com.mooc.libnetwork.ApiService;
-import com.mooc.libnetwork.JsonCallback;
 import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.model.Comment;
 import com.mooc.ppjoke.ui.detail.base.DialogDataBindingFragment;
-import com.mooc.ppjoke.ui.login.UserManager;
 import com.mooc.ppjoke.ui.publish.CaptureActivity;
 import com.mooc.ppjoke.ui.state.CommentViewModel;
 
@@ -66,6 +61,15 @@ public class CommentDialog extends DialogDataBindingFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.itemId = getArguments().getLong(KEY_ITEM_ID);
+
+		mCommentViewModel.commentRequest.getCommentMessage().observe(this, this::showShortToast);
+
+		mCommentViewModel.commentRequest.getCommentStatus().observe(this, comment -> {
+			if (comment != null) {
+				onCommentSuccess(comment);
+			}
+			dismissLoadingDialog();
+		});
 	}
 
 
@@ -97,16 +101,11 @@ public class CommentDialog extends DialogDataBindingFragment {
 		}
 
 		if (isVideo && !TextUtils.isEmpty(filePath)) {
-			FileUtils.generateVideoCover(filePath).observe(this, new Observer<String>() {
-				@Override
-				public void onChanged(String coverPath) {
-					uploadFile(coverPath, filePath);
-				}
-			});
+			FileUtils.generateVideoCover(filePath).observe(this, coverPath -> uploadFile(coverPath, filePath));
 		} else if (!TextUtils.isEmpty(filePath)) {
 			uploadFile(null, filePath);
 		} else {
-			publish();
+			mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), isVideo, width, height, coverUrl, fileUrl);
 		}
 	}
 
@@ -116,18 +115,15 @@ public class CommentDialog extends DialogDataBindingFragment {
 		AtomicInteger count = new AtomicInteger(1);
 		if (!TextUtils.isEmpty(coverPath)) {
 			count.set(2);
-			ArchTaskExecutor.getIOThreadExecutor().execute(new Runnable() {
-				@Override
-				public void run() {
-					int remain = count.decrementAndGet();
-					coverUrl = FileUploadManager.upload(coverPath);
-					if (remain <= 0) {
-						if (!TextUtils.isEmpty(fileUrl) && !TextUtils.isEmpty(coverUrl)) {
-							publish();
-						} else {
-							dismissLoadingDialog();
-							showToast(getString(R.string.file_upload_failed));
-						}
+			ArchTaskExecutor.getIOThreadExecutor().execute(() -> {
+				int remain = count.decrementAndGet();
+				coverUrl = FileUploadManager.upload(coverPath);
+				if (remain <= 0) {
+					if (!TextUtils.isEmpty(fileUrl) && !TextUtils.isEmpty(coverUrl)) {
+						mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), isVideo, width, height, coverUrl, fileUrl);
+					} else {
+						dismissLoadingDialog();
+						showToast(getString(R.string.file_upload_failed));
 					}
 				}
 			});
@@ -137,7 +133,7 @@ public class CommentDialog extends DialogDataBindingFragment {
 			fileUrl = FileUploadManager.upload(filePath);
 			if (remain <= 0) {
 				if (!TextUtils.isEmpty(fileUrl) || !TextUtils.isEmpty(coverPath) && !TextUtils.isEmpty(coverUrl)) {
-					publish();
+					mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), isVideo, width, height, coverUrl, fileUrl);
 				} else {
 					dismissLoadingDialog();
 					showToast(getString(R.string.file_upload_failed));
@@ -147,29 +143,6 @@ public class CommentDialog extends DialogDataBindingFragment {
 
 	}
 
-	private void publish() {
-		ApiService.post("/comment/addComment")
-				.addParam("userId", UserManager.get().getUserId())
-				.addParam("itemId", itemId)
-				.addParam("commentText", mCommentViewModel.commentText.get())
-				.addParam("image_url", isVideo ? coverUrl : fileUrl)
-				.addParam("video_url", isVideo ? fileUrl : null)
-				.addParam("width", width)
-				.addParam("height", height)
-				.execute(new JsonCallback<Comment>() {
-					@Override
-					public void onSuccess(ApiResponse<Comment> response) {
-						onCommentSuccess(response.body);
-						dismissLoadingDialog();
-					}
-
-					@Override
-					public void onError(ApiResponse<Comment> response) {
-						showToast("评论失败:" + response.message);
-						dismissLoadingDialog();
-					}
-				});
-	}
 
 	private void showLoadingDialog() {
 		if (loadingDialog == null) {
