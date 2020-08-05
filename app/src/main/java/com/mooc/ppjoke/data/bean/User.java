@@ -1,12 +1,10 @@
-package com.mooc.ppjoke.model;
+package com.mooc.ppjoke.data.bean;
 
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-
-import com.mooc.ppjoke.BR;
 
 import java.io.Serializable;
 

@@ -10,7 +10,7 @@ import com.mooc.libarchitecture.utils.Utils;
 import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
-import com.mooc.ppjoke.model.User;
+import com.mooc.ppjoke.data.bean.User;
 import com.mooc.ppjoke.ui.login.UserManager;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;

@@ -17,8 +17,8 @@ import com.mooc.libcommon.utils.PixUtils;
 import com.mooc.libcommon.view.EmptyView;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.databinding.LayoutFeedDetailBottomInateractionBinding;
-import com.mooc.ppjoke.model.Comment;
-import com.mooc.ppjoke.model.Feed;
+import com.mooc.ppjoke.data.bean.Comment;
+import com.mooc.ppjoke.data.bean.Feed;
 import com.mooc.ppjoke.ui.state.FeedDetailViewModel;
 
 public abstract class ViewHandler {

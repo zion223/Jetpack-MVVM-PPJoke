@@ -6,13 +6,13 @@
 
         <variable
             name="feed"
-            type="Feed" />
+            type="com.mooc.ppjoke.data.bean.Feed" />
 
         <variable
             name="lifeCycleOwner"
             type="androidx.lifecycle.LifecycleOwner" />
 
-        <import type="com.mooc.ppjoke.model.Feed"/>
+        <import type="com.mooc.ppjoke.data.bean.Feed" />
 
         <import type="android.view.View"/>
 

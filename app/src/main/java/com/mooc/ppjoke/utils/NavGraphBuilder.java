@@ -3,7 +3,6 @@ package com.mooc.ppjoke.utils;
 import android.content.ComponentName;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.ActivityNavigator;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
@@ -13,7 +12,7 @@ import androidx.navigation.fragment.FragmentNavigator;
 
 import com.mooc.libcommon.global.AppGlobals;
 import com.mooc.ppjoke.navigator.FixFragmentNavigator;
-import com.mooc.ppjoke.model.Destination;
+import com.mooc.ppjoke.data.bean.Destination;
 
 import java.util.HashMap;
 import java.util.Iterator;

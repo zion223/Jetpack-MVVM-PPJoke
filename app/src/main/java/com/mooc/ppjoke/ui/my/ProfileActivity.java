@@ -12,7 +12,7 @@ import com.mooc.libarchitecture.ui.page.BaseActivity;
 import com.mooc.libcommon.utils.StatusBar;
 import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.User;
+import com.mooc.ppjoke.data.bean.User;
 import com.mooc.ppjoke.ui.login.UserManager;
 import com.mooc.ppjoke.ui.state.ProfileActivityViewModel;
 

@@ -12,7 +12,7 @@ import com.mooc.libarchitecture.ui.page.BaseFragment;
 import com.mooc.libnavannotation.FragmentDestination;
 import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.SofaTab;
+import com.mooc.ppjoke.data.bean.SofaTab;
 import com.mooc.ppjoke.ui.state.SofaViewModel;
 import com.mooc.ppjoke.utils.AppConfig;
 

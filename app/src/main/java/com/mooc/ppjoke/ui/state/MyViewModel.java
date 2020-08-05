@@ -3,7 +3,7 @@ package com.mooc.ppjoke.ui.state;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.mooc.ppjoke.model.User;
+import com.mooc.ppjoke.data.bean.User;
 
 public class MyViewModel extends ViewModel {
 

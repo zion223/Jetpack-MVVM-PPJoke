@@ -23,7 +23,7 @@ import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.TagList;
+import com.mooc.ppjoke.data.bean.TagList;
 import com.mooc.ppjoke.ui.login.UserManager;
 
 import java.util.ArrayList;

@@ -1,13 +1,12 @@
 package com.mooc.ppjoke.ui.state;
 
 import androidx.annotation.NonNull;
-import androidx.paging.DataSource;
 import androidx.paging.ItemKeyedDataSource;
 
 import com.alibaba.fastjson.TypeReference;
 import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
-import com.mooc.ppjoke.model.Comment;
+import com.mooc.ppjoke.data.bean.Comment;
 import com.mooc.ppjoke.ui.AbsViewModel;
 import com.mooc.ppjoke.ui.login.UserManager;
 

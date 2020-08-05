@@ -7,7 +7,7 @@
 
         <variable
             name="feed"
-            type="com.mooc.ppjoke.model.Feed" />
+            type="com.mooc.ppjoke.data.bean.Feed" />
 
         <variable
             name="fullscreen"

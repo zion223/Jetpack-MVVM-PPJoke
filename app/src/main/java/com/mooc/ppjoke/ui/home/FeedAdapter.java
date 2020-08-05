@@ -20,7 +20,7 @@ import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.databinding.LayoutFeedTypeImageBinding;
 import com.mooc.ppjoke.databinding.LayoutFeedTypeVideoBinding;
-import com.mooc.ppjoke.model.Feed;
+import com.mooc.ppjoke.data.bean.Feed;
 import com.mooc.ppjoke.ui.InteractionPresenter;
 import com.mooc.ppjoke.ui.detail.FeedDetailActivity;
 import com.mooc.ppjoke.view.ListPlayerView;

@@ -1,4 +1,4 @@
-package com.mooc.ppjoke.model;
+package com.mooc.ppjoke.data.bean;
 
 public class Destination {
     public String pageUrl;

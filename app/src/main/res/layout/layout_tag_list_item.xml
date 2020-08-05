@@ -7,7 +7,7 @@
 
         <variable
             name="tagList"
-            type="com.mooc.ppjoke.model.TagList" />
+            type="com.mooc.ppjoke.data.bean.TagList" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

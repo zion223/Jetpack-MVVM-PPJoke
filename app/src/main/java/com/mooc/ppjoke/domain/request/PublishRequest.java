@@ -10,8 +10,8 @@ import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.Feed;
-import com.mooc.ppjoke.model.TagList;
+import com.mooc.ppjoke.data.bean.Feed;
+import com.mooc.ppjoke.data.bean.TagList;
 import com.mooc.ppjoke.ui.login.UserManager;
 
 public class PublishRequest extends BaseRequest {

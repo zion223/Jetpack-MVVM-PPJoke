@@ -6,7 +6,7 @@ import androidx.databinding.ObservableInt;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 
-import com.mooc.ppjoke.model.SofaTab;
+import com.mooc.ppjoke.data.bean.SofaTab;
 
 public class SofaViewModel extends ViewModel {
 

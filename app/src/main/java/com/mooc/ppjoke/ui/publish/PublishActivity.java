@@ -23,7 +23,7 @@ import com.mooc.libcommon.utils.StatusBar;
 import com.mooc.libnavannotation.ActivityDestination;
 import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.TagList;
+import com.mooc.ppjoke.data.bean.TagList;
 import com.mooc.ppjoke.ui.state.PublishViewModel;
 
 import org.jetbrains.annotations.NotNull;

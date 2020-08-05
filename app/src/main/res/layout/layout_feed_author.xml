@@ -7,9 +7,9 @@
 
         <variable
             name="user"
-            type="User" />
+            type="com.mooc.ppjoke.data.bean.User" />
 
-        <import type="com.mooc.ppjoke.model.User" />
+        <import type="com.mooc.ppjoke.data.bean.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

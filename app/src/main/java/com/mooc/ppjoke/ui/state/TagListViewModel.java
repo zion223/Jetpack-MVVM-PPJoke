@@ -8,7 +8,7 @@ import androidx.paging.ItemKeyedDataSource;
 import com.alibaba.fastjson.TypeReference;
 import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
-import com.mooc.ppjoke.model.TagList;
+import com.mooc.ppjoke.data.bean.TagList;
 import com.mooc.ppjoke.ui.AbsViewModel;
 import com.mooc.ppjoke.ui.login.UserManager;
 

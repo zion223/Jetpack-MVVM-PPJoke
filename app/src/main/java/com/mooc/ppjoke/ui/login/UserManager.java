@@ -13,7 +13,7 @@ import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
 import com.mooc.libnetwork.cache.CacheManager;
-import com.mooc.ppjoke.model.User;
+import com.mooc.ppjoke.data.bean.User;
 
 public class UserManager {
     private static final String KEY_CACHE_USER = "cache_user";

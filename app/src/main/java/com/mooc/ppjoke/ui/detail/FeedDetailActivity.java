@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.mooc.ppjoke.model.Feed;
+import com.mooc.ppjoke.data.bean.Feed;
 
 public class FeedDetailActivity extends AppCompatActivity {
     private static final String KEY_FEED = "key_feed";

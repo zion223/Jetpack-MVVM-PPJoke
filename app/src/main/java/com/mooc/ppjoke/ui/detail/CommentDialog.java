@@ -17,7 +17,7 @@ import com.mooc.libcommon.utils.FileUploadManager;
 import com.mooc.libcommon.utils.FileUtils;
 import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.Comment;
+import com.mooc.ppjoke.data.bean.Comment;
 import com.mooc.ppjoke.ui.detail.base.DialogDataBindingFragment;
 import com.mooc.ppjoke.ui.publish.CaptureActivity;
 import com.mooc.ppjoke.ui.state.CommentViewModel;

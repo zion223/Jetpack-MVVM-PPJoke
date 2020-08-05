@@ -12,7 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mooc.libcommon.utils.StatusBar;
-import com.mooc.ppjoke.model.Destination;
+import com.mooc.ppjoke.data.bean.Destination;
 import com.mooc.ppjoke.ui.login.UserManager;
 import com.mooc.ppjoke.utils.AppConfig;
 import com.mooc.ppjoke.utils.NavGraphBuilder;

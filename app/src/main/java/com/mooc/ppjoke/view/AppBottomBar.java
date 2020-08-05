@@ -14,8 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.BottomBar;
-import com.mooc.ppjoke.model.Destination;
+import com.mooc.ppjoke.data.bean.BottomBar;
+import com.mooc.ppjoke.data.bean.Destination;
 import com.mooc.ppjoke.utils.AppConfig;
 
 import java.util.List;

@@ -14,7 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.model.SofaTab;
+import com.mooc.ppjoke.data.bean.SofaTab;
 import com.mooc.ppjoke.ui.find.TagListFragment;
 import com.mooc.ppjoke.ui.home.HomeFragment;
 

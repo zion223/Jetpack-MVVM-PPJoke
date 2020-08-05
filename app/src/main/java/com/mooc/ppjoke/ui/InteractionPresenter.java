@@ -18,10 +18,10 @@ import com.mooc.libcommon.global.AppGlobals;
 import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
-import com.mooc.ppjoke.model.Comment;
-import com.mooc.ppjoke.model.Feed;
-import com.mooc.ppjoke.model.TagList;
-import com.mooc.ppjoke.model.User;
+import com.mooc.ppjoke.data.bean.Comment;
+import com.mooc.ppjoke.data.bean.Feed;
+import com.mooc.ppjoke.data.bean.TagList;
+import com.mooc.ppjoke.data.bean.User;
 import com.mooc.ppjoke.ui.login.UserManager;
 import com.mooc.ppjoke.ui.share.ShareDialog;
 

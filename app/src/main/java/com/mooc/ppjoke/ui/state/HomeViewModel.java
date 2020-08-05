@@ -15,7 +15,7 @@ import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
 import com.mooc.libnetwork.Request;
 import com.mooc.ppjoke.ui.AbsViewModel;
-import com.mooc.ppjoke.model.Feed;
+import com.mooc.ppjoke.data.bean.Feed;
 import com.mooc.ppjoke.ui.MutablePageKeyedDataSource;
 import com.mooc.ppjoke.ui.login.UserManager;
 

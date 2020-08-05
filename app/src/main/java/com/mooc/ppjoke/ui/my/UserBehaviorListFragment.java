@@ -10,7 +10,7 @@ import androidx.paging.PagedListAdapter;
 
 import com.mooc.ppjoke.exoplayer.PageListPlayDetector;
 import com.mooc.ppjoke.exoplayer.PageListPlayManager;
-import com.mooc.ppjoke.model.Feed;
+import com.mooc.ppjoke.data.bean.Feed;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.home.FeedAdapter;
 import com.mooc.ppjoke.ui.state.UserBehaviorViewModel;

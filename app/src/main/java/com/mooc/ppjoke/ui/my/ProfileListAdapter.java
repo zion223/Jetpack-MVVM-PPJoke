@@ -7,14 +7,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.paging.ItemKeyedDataSource;
 import androidx.paging.PagedList;
 
 import com.mooc.ppjoke.R;
-import com.mooc.ppjoke.databinding.LayoutFeedTypeCommentBinding;
-import com.mooc.ppjoke.databinding.LayoutProfileTabCommentInteractionBinding;
-import com.mooc.ppjoke.model.Feed;
+import com.mooc.ppjoke.data.bean.Feed;
 import com.mooc.ppjoke.ui.InteractionPresenter;
 import com.mooc.ppjoke.ui.MutableItemKeyedDataSource;
 import com.mooc.ppjoke.ui.home.FeedAdapter;

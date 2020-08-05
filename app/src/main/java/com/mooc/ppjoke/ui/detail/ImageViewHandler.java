@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.databinding.ActivityFeedDetailTypeImageBinding;
 import com.mooc.ppjoke.databinding.LayoutFeedDetailTypeImageHeaderBinding;
-import com.mooc.ppjoke.model.Feed;
+import com.mooc.ppjoke.data.bean.Feed;
 import com.mooc.ppjoke.view.PPImageView;
 
 public class ImageViewHandler extends ViewHandler {

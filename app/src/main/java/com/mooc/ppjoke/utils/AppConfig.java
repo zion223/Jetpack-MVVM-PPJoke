@@ -5,9 +5,9 @@ import android.content.res.AssetManager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.mooc.libcommon.global.AppGlobals;
-import com.mooc.ppjoke.model.BottomBar;
-import com.mooc.ppjoke.model.Destination;
-import com.mooc.ppjoke.model.SofaTab;
+import com.mooc.ppjoke.data.bean.BottomBar;
+import com.mooc.ppjoke.data.bean.Destination;
+import com.mooc.ppjoke.data.bean.SofaTab;
 
 import java.io.BufferedReader;
 import java.io.IOException;

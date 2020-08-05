@@ -7,7 +7,7 @@ import com.mooc.libarchitecture.domain.request.BaseRequest;
 import com.mooc.libnetwork.ApiResponse;
 import com.mooc.libnetwork.ApiService;
 import com.mooc.libnetwork.JsonCallback;
-import com.mooc.ppjoke.model.Comment;
+import com.mooc.ppjoke.data.bean.Comment;
 import com.mooc.ppjoke.ui.login.UserManager;
 
 public class CommentRequest extends BaseRequest {

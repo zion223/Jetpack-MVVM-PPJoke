@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.paging.ItemKeyedDataSource;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DiffUtil;
@@ -19,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mooc.libcommon.extention.AbsPagedListAdapter;
 import com.mooc.libcommon.utils.PixUtils;
 import com.mooc.ppjoke.databinding.LayoutFeedCommentListItemBinding;
-import com.mooc.ppjoke.model.Comment;
+import com.mooc.ppjoke.data.bean.Comment;
 import com.mooc.ppjoke.ui.InteractionPresenter;
 import com.mooc.ppjoke.ui.MutableItemKeyedDataSource;
 import com.mooc.ppjoke.ui.login.UserManager;

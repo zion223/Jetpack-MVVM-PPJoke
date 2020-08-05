@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mooc.libcommon.extention.AbsPagedListAdapter;
 import com.mooc.ppjoke.databinding.LayoutTagListItemBinding;
-import com.mooc.ppjoke.model.TagList;
+import com.mooc.ppjoke.data.bean.TagList;
 import com.mooc.ppjoke.ui.InteractionPresenter;
 
 public class TagListAdapter extends AbsPagedListAdapter<TagList, TagListAdapter.ViewHolder> {

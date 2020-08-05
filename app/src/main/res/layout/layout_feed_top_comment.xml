@@ -7,7 +7,7 @@
 
         <variable
             name="comment"
-            type="com.mooc.ppjoke.model.Comment" />
+            type="com.mooc.ppjoke.data.bean.Comment" />
 
         <variable
             name="lifeCycleOwner"

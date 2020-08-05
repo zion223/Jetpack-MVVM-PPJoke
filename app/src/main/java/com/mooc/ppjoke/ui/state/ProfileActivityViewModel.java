@@ -4,7 +4,7 @@ import androidx.databinding.ObservableField;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModel;
 
-import com.mooc.ppjoke.model.User;
+import com.mooc.ppjoke.data.bean.User;
 
 public class ProfileActivityViewModel extends ViewModel {
 

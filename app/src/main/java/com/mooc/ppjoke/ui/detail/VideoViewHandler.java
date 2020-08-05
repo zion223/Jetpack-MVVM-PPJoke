@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.databinding.LayoutFeedDetailTypeVideoBinding;
 import com.mooc.ppjoke.databinding.LayoutFeedDetailTypeVideoHeaderBinding;
-import com.mooc.ppjoke.model.Feed;
+import com.mooc.ppjoke.data.bean.Feed;
 import com.mooc.ppjoke.view.FullScreenPlayerView;
 
 public class VideoViewHandler extends ViewHandler {
