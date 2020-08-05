@@ -51,7 +51,7 @@ public class DataResult<T> {
         return mNetState;
     }
 
-    public void setResult(T t, NetState netState) {
+    public void setResult(T t, NetState netState, String message) {
         if (mResult == null) {
             throw new NullPointerException("Need to instantiate the Result<T> first ...");
         }
@@ -64,7 +64,7 @@ public class DataResult<T> {
 
         mT = t;
         mNetState = netState;
-        mResult.onResult(t, netState);
+        mResult.onResult(t, netState, message);
     }
 
     public void onObserve(Result<T> result) {
@@ -77,6 +77,6 @@ public class DataResult<T> {
     }
 
     public interface Result<T> {
-        void onResult(T t, NetState netState);
+        void onResult(T t, NetState netState, String message);
     }
 }
