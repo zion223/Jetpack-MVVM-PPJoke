@@ -21,6 +21,24 @@ import com.mooc.ppjoke.view.AppBottomBar;
 import java.util.HashMap;
 import java.util.Map;
 
+//  ┏┓　　　┏┓
+//┏┛┻━━━┛┻┓
+//┃　　　　　　　┃
+//┃　　　━　　　┃
+//┃　┳┛　┗┳　┃
+//┃　　　　　　　┃
+//┃　　　┻　　　┃
+//┃　　　　　　　┃
+//┗━┓　　　┏━┛
+//    ┃　　　┃   神兽保佑
+//    ┃　　　┃   代码无BUG！
+//    ┃　　　┗━━━┓
+//    ┃　　　　　　　┣┓
+//    ┃　　　　　　　┏┛
+//    ┗┓┓┏━┳┓┏┛
+//      ┃┫┫　┃┫┫
+//      ┗┻┛　┗┻┛
+
 /**
  * App 主页 入口
  * <p>
