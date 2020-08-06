@@ -29,7 +29,7 @@
         android:text="@{tagText}"
         android:textColor="@color/color_2f2"
         android:textSize="@dimen/sp_10"
-        android:visibility="@{TextUtils.isEmpty(tagText)?View.GONE:View.VISIBLE}"
+        android:visibility="@{TextUtils.isEmpty(tagText)? View.GONE: View.VISIBLE}"
         app:backgroundTint="@color/color_gray"
         app:cornerRadius="10dp"
         app:icon="@drawable/icon_tag"

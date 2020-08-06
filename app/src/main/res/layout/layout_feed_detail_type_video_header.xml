@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include xmlns:app="http://schemas.android.com/apk/res-auto"
+        <include
             layout="@layout/layout_feed_text"
             app:feedText="@{feed.feeds_text}"
-            app:lines="@{1000}"/>
+            app:lines="@{1000}" />
 
         <include
             layout="@layout/layout_feed_tag"

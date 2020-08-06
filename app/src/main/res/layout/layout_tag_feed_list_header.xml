@@ -61,13 +61,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_16"
             android:layout_marginRight="@dimen/dimen_16"
-            android:onClick="@{()->InteractionPresenter.toggleTagLike(owner,tagList)}"
-            android:text="@{tagList.hasFollow?@string/tag_follow:@string/tag_unfollow}"
+            android:onClick="@{() -> InteractionPresenter.toggleTagLike(owner,tagList)}"
+            android:text="@{tagList.hasFollow? @string/tag_follow: @string/tag_unfollow}"
             android:textColor="@color/color_theme"
             android:textSize="13sp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_background"
-            tools:text="@string/tag_follow"/>
+            tools:text="@string/tag_follow" />
 
         <TextView
             android:id="@+id/header_intro"
@@ -79,7 +79,7 @@
             android:text="@{tagList.intro}"
             android:textColor="@color/color_999"
             android:textSize="13sp"
-            android:visibility="@{TextUtils.isEmpty(tagList.intro)?View.GONE:View.VISIBLE}"
+            android:visibility="@{TextUtils.isEmpty(tagList.intro)? View.GONE: View.VISIBLE}"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/header_follow"
@@ -95,7 +95,7 @@
             android:text="@{StringConvert.convertTagFeedList(tagList.enterNum)}"
             android:textColor="@color/color_999"
             android:textSize="13sp"
-            android:visibility="@{tagList.enterNum>0?View.VISIBLE:View.GONE}"
+            android:visibility="@{tagList.enterNum > 0? View.VISIBLE: View.GONE}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_intro"
             tools:text="神秘的jetpack"/>

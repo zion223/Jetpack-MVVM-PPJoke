@@ -29,7 +29,7 @@
         android:text="@{feedText}"
         android:textColor="@color/color_2f2"
         android:textSize="@dimen/sp_16"
-        android:visibility="@{TextUtils.isEmpty(feedText)?View.GONE:View.VISIBLE}"
+        android:visibility="@{TextUtils.isEmpty(feedText)? View.GONE: View.VISIBLE}"
         tools:text="神秘的jetpack神秘的jetpack">
 
     </TextView>

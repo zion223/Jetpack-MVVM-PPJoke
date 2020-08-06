@@ -74,7 +74,7 @@
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="28dp"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:onClick="@{()->InteractionPresenter.toggleTagLike(owner,tagList)}"
+                android:onClick="@{() -> InteractionPresenter.toggleTagLike(owner,tagList)}"
                 android:paddingLeft="@dimen/dp_0"
                 android:paddingTop="@dimen/dp_0"
                 android:paddingRight="@dimen/dp_0"

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
         <variable
             name="vm"
             type="com.mooc.ppjoke.ui.state.LoginViewModel" />
+
         <variable
             name="proxy"
             type="com.mooc.ppjoke.ui.login.LoginActivity.ClickProxy" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -39,9 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="150dp"
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_30"
+            android:layout_marginBottom="150dp"
             android:gravity="center"
             android:onClick="@{()->proxy.login()}"
             android:text="@string/login_text"

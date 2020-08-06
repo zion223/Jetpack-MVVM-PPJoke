@@ -2,10 +2,10 @@
 <resources>
 
     <declare-styleable name="RecordView">
-        <attr name="progress_color" format="color"></attr>
-        <attr name="progress_width" format="dimension"></attr>
-        <attr name="fill_color" format="color"></attr>
-        <attr name="radius" format="dimension"></attr>
-        <attr name="duration" format="integer"></attr>
+        <attr name="progress_color" format="color" />
+        <attr name="progress_width" format="dimension" />
+        <attr name="fill_color" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="duration" format="integer" />
     </declare-styleable>
 </resources>
