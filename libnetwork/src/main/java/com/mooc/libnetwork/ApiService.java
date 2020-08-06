@@ -1,5 +1,7 @@
 package com.mooc.libnetwork;
 
+import com.mooc.libnetwork.interceptor.LoggingInterceptor;
+
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -15,7 +17,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ApiService {
     protected static final OkHttpClient okHttpClient;
@@ -23,14 +24,12 @@ public class ApiService {
     protected static Convert sConvert;
 
     static {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new LoggingInterceptor())
                 .readTimeout(5, TimeUnit.SECONDS)
                 .writeTimeout(5, TimeUnit.SECONDS)
                 .connectTimeout(5, TimeUnit.SECONDS)
-                .addInterceptor(interceptor)
                 .build();
 
         //http 证书问题
