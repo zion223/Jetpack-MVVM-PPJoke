@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.databinding.BindingAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
@@ -78,5 +79,15 @@ public class CommonBindingAdapter {
 	@BindingAdapter(value = {"enabled"}, requireAll = false)
 	public static void setImageRes(ImageView imageView, boolean enabled) {
 		imageView.setEnabled(enabled);
+	}
+
+	@BindingAdapter(value = {"removedItemDecoration"}, requireAll = false)
+	public static void removeItemDecorationAt(RecyclerView recyclerView, int item) {
+		recyclerView.removeItemDecorationAt(item);
+	}
+
+	@BindingAdapter(value = {"scrollToPosition"}, requireAll = false)
+	public static void scrollToPosition(RecyclerView recyclerView, int position) {
+		recyclerView.scrollToPosition(position);
 	}
 }

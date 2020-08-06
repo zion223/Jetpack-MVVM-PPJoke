@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.BindingAdapter;
 
 import com.mooc.libcommon.R;
 
@@ -58,7 +59,13 @@ public class EmptyView extends LinearLayout {
             title.setText(text);
             title.setVisibility(VISIBLE);
         }
+    }
 
+
+    @BindingAdapter(value = {"emptyViewTitle", "emptyViewButtonTitle", "emptyViewButtonListener"})
+    public static void setEmptyViewTitle(EmptyView view, String text, String title, OnClickListener listener) {
+        view.setTitle(text);
+        view.setButton(title, listener);
     }
 
     public void setButton(String text, View.OnClickListener listener) {

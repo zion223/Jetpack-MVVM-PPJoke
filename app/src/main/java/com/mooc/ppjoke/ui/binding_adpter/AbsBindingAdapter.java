@@ -31,4 +31,9 @@ public class AbsBindingAdapter {
 			refreshLayout.finishRefresh();
 		}
 	}
+
+	@BindingAdapter(value = {"enableRefresh"})
+	public static void setEnableRefresh(SmartRefreshLayout refreshLayout, Boolean enable) {
+		refreshLayout.setEnableRefresh(enable);
+	}
 }

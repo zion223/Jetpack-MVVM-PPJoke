@@ -76,7 +76,7 @@ public class HomeFragment extends AbsListFragment<Feed, HomeViewModel> {
                 //每调用一次 adpater.submitlist
                 if (previousList != null && currentList != null) {
                     if (!currentList.containsAll(previousList)) {
-                        ((LayoutRefreshViewBinding) getBinding()).recyclerView.scrollToPosition(0);
+                        mViewModel.scrollToPosition.set(0);
                     }
                 }
             }

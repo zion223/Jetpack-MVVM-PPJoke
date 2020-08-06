@@ -10,7 +10,6 @@ import androidx.paging.PagedList;
 import androidx.paging.PagedListAdapter;
 
 import com.mooc.ppjoke.data.bean.Feed;
-import com.mooc.ppjoke.databinding.LayoutRefreshViewBinding;
 import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.state.ProfileViewModel;
@@ -34,7 +33,7 @@ public class ProfileListFragment extends AbsListFragment<Feed, ProfileViewModel>
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewModel.setProfileType(tabType);
-        ((LayoutRefreshViewBinding) getBinding()).refreshLayout.setEnableRefresh(false);
+        mViewModel.enableRefresh.setValue(false);
     }
 
     @Override

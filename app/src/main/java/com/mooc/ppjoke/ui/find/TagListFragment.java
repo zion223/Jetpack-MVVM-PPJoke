@@ -37,15 +37,11 @@ public class TagListFragment extends AbsListFragment<TagList, TagListViewModel> 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (TextUtils.equals(tagType, "onlyFollow")) {
-            ((LayoutRefreshViewBinding) getBinding()).emptyView.setTitle(getString(R.string.tag_list_no_follow));
-            ((LayoutRefreshViewBinding) getBinding()).emptyView.setButton(getString(R.string.tag_list_no_follow_button), new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mViewModel.getSwitchTabLiveData().setValue(new Object());
-                }
-            });
+            mViewModel.emptyViewTitle.set(getString(R.string.tag_list_no_follow));
+            mViewModel.emptyViewButtonTitle.set(getString(R.string.tag_list_no_follow_button));
+            mViewModel.emptyViewButtonListener.set(v -> mViewModel.getSwitchTabLiveData().setValue(new Object()));
         }
-        ((LayoutRefreshViewBinding) getBinding()).recyclerView.removeItemDecorationAt(0);
+        mViewModel.removedItemDecoration.set(0);
         mViewModel.setTagType(tagType);
     }
 

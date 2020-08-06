@@ -26,6 +26,7 @@
             onLoadMoreListener="@{absFragment}"
             onRefreshListener="@{absFragment}"
             reloadRefreshState="@{vm.reload}"
+            enableRefresh="@{vm.enableRefresh}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srlEnableLoadMore="true"
@@ -38,6 +39,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 adapter="@{vm.adapter}"
+                scrollToPosition="@{vm.scrollToPosition}"
+                removedItemDecoration="@{vm.removedItemDecoration}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -52,6 +55,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="100dp"
+            emptyViewTitle="@{vm.emptyViewTitle}"
+            emptyViewButtonTitle="@{vm.emptyViewButtonTitle}"
+            emptyViewButtonListener="@{vm.emptyViewButtonListener}"
             android:visibility="@{vm.hasData? View.GONE: View.VISIBLE}" />
     </FrameLayout>
 </layout>

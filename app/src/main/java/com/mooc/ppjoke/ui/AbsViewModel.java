@@ -1,8 +1,11 @@
 package com.mooc.ppjoke.ui;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -22,7 +25,15 @@ public abstract class AbsViewModel<T> extends ViewModel {
 
     public ObservableBoolean hasData = new ObservableBoolean();
     public MutableLiveData<Object> reload = new MutableLiveData<>();
+    public MutableLiveData<Boolean> enableRefresh = new MutableLiveData<>();
     public ObservableField<PagedListAdapter> adapter = new ObservableField<>();
+    public ObservableInt removedItemDecoration = new ObservableInt();
+    public ObservableInt scrollToPosition = new ObservableInt();
+
+    //emptyView
+    public ObservableField<String> emptyViewTitle = new ObservableField<>();
+    public ObservableField<String> emptyViewButtonTitle = new ObservableField<>();
+    public ObservableField<View.OnClickListener> emptyViewButtonListener = new ObservableField<>();
 
     public AbsViewModel() {
 
@@ -41,6 +52,7 @@ public abstract class AbsViewModel<T> extends ViewModel {
                 .build();
 
         hasData.set(false);
+        enableRefresh.setValue(true);
     }
 
 
