@@ -24,4 +24,11 @@ public class CommentViewModel extends ViewModel {
 		filePath.set(null);
 		isVideo.set(false);
 	}
+
+	@Override
+	protected void onCleared() {
+		super.onCleared();
+		isVideo.set(false);
+		filePath.set(null);
+	}
 }

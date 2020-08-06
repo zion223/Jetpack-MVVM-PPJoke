@@ -25,15 +25,16 @@ import com.mooc.ppjoke.ui.state.CommentViewModel;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CommentDialog extends DialogDataBindingFragment {
-	private long itemId;
-	private CommentAddListener mListener;
+
 	private static final String KEY_ITEM_ID = "key_item_id";
-	private String filePath;
+
+	private long itemId;
 	private int width, height;
-	private boolean isVideo;
 	private String coverUrl;
 	private String fileUrl;
 	private LoadingDialog loadingDialog;
+	private CommentAddListener mListener;
+
 
 	private CommentViewModel mCommentViewModel;
 
@@ -83,10 +84,10 @@ public class CommentDialog extends DialogDataBindingFragment {
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == CaptureActivity.REQ_CAPTURE && resultCode == Activity.RESULT_OK) {
-			filePath = data.getStringExtra(CaptureActivity.RESULT_FILE_PATH);
+			String filePath = data.getStringExtra(CaptureActivity.RESULT_FILE_PATH);
 			width = data.getIntExtra(CaptureActivity.RESULT_FILE_WIDTH, 0);
 			height = data.getIntExtra(CaptureActivity.RESULT_FILE_HEIGHT, 0);
-			isVideo = data.getBooleanExtra(CaptureActivity.RESULT_FILE_TYPE, false);
+			boolean isVideo = data.getBooleanExtra(CaptureActivity.RESULT_FILE_TYPE, false);
 
 			mCommentViewModel.filePath.set(filePath);
 			mCommentViewModel.isVideo.set(isVideo);
@@ -100,12 +101,12 @@ public class CommentDialog extends DialogDataBindingFragment {
 			return;
 		}
 
-		if (isVideo && !TextUtils.isEmpty(filePath)) {
-			FileUtils.generateVideoCover(filePath).observe(this, coverPath -> uploadFile(coverPath, filePath));
-		} else if (!TextUtils.isEmpty(filePath)) {
-			uploadFile(null, filePath);
+		if (mCommentViewModel.isVideo.get() && !TextUtils.isEmpty(mCommentViewModel.filePath.get())) {
+			FileUtils.generateVideoCover(mCommentViewModel.filePath.get()).observe(this, coverPath -> uploadFile(coverPath, mCommentViewModel.filePath.get()));
+		} else if (!TextUtils.isEmpty(mCommentViewModel.filePath.get())) {
+			uploadFile(null, mCommentViewModel.filePath.get());
 		} else {
-			mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), isVideo, width, height, coverUrl, fileUrl);
+			mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), mCommentViewModel.isVideo.get(), width, height, coverUrl, fileUrl);
 		}
 	}
 
@@ -120,7 +121,7 @@ public class CommentDialog extends DialogDataBindingFragment {
 				coverUrl = FileUploadManager.upload(coverPath);
 				if (remain <= 0) {
 					if (!TextUtils.isEmpty(fileUrl) && !TextUtils.isEmpty(coverUrl)) {
-						mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), isVideo, width, height, coverUrl, fileUrl);
+						mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), mCommentViewModel.isVideo.get(), width, height, coverUrl, fileUrl);
 					} else {
 						dismissLoadingDialog();
 						showToast(getString(R.string.file_upload_failed));
@@ -133,7 +134,7 @@ public class CommentDialog extends DialogDataBindingFragment {
 			fileUrl = FileUploadManager.upload(filePath);
 			if (remain <= 0) {
 				if (!TextUtils.isEmpty(fileUrl) || !TextUtils.isEmpty(coverPath) && !TextUtils.isEmpty(coverUrl)) {
-					mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), isVideo, width, height, coverUrl, fileUrl);
+					mCommentViewModel.commentRequest.requestComment(itemId, mCommentViewModel.commentText.get(), mCommentViewModel.isVideo.get(), width, height, coverUrl, fileUrl);
 				} else {
 					dismissLoadingDialog();
 					showToast(getString(R.string.file_upload_failed));
@@ -185,10 +186,8 @@ public class CommentDialog extends DialogDataBindingFragment {
 	public void dismiss() {
 		super.dismiss();
 		dismissLoadingDialog();
-		filePath = null;
 		fileUrl = null;
 		coverUrl = null;
-		isVideo = false;
 		width = 0;
 		height = 0;
 	}
@@ -222,10 +221,9 @@ public class CommentDialog extends DialogDataBindingFragment {
 		}
 
 		public void delete() {
-			filePath = null;
-			isVideo = false;
 			width = 0;
 			height = 0;
+			mCommentViewModel.isVideo.set(false);
 			mCommentViewModel.filePath.set(null);
 			mCommentViewModel.commentVideoImageAlpha.set(255);
 		}
