@@ -13,7 +13,6 @@ import androidx.paging.PagedListAdapter;
 
 import com.mooc.libnavannotation.FragmentDestination;
 import com.mooc.ppjoke.data.bean.Feed;
-import com.mooc.ppjoke.databinding.LayoutRefreshViewBinding;
 import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.MutablePageKeyedDataSource;
@@ -25,6 +24,9 @@ import java.util.List;
 @FragmentDestination(pageUrl = "main/tabs/home", asStarter = true)
 public class HomeFragment extends AbsListFragment<Feed, HomeViewModel> {
     //private PageListPlayDetector playDetector;
+
+    private static final String TAG = "HomeFragment";
+
     private String feedType;
     private boolean shouldPause = true;
 
@@ -136,7 +138,7 @@ public class HomeFragment extends AbsListFragment<Feed, HomeViewModel> {
         if (shouldPause) {
             playDetector.onPause();
         }
-        Log.e("homefragment", "onPause: feedtype:" + feedType);
+        Log.e(TAG, "onPause: feedtype:" + feedType);
         super.onPause();
     }
 
@@ -149,12 +151,12 @@ public class HomeFragment extends AbsListFragment<Feed, HomeViewModel> {
         //当且仅当 它和它的ParentFragment均可见的时候，才能恢复视频播放
         if (getParentFragment() != null) {
             if (getParentFragment().isVisible() && isVisible()) {
-                Log.e("homefragment", "onResume: feedtype:" + feedType);
+                Log.e(TAG, "onResume: feedtype:" + feedType);
                 playDetector.onResume();
             }
         } else {
             if (isVisible()) {
-                Log.e("homefragment", "onResume: feedtype:" + feedType);
+                Log.e(TAG, "onResume: feedtype:" + feedType);
                 playDetector.onResume();
             }
         }

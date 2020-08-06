@@ -26,6 +26,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HomeViewModel extends AbsViewModel<Feed> {
 
+    private static final String TAG = "HomeViewModel";
+
     private volatile boolean witchCache = true;
     private MutableLiveData<PagedList<Feed>> cacheLiveData = new MutableLiveData<>();
     private AtomicBoolean loadAfter = new AtomicBoolean(false);
@@ -49,7 +51,7 @@ public class HomeViewModel extends AbsViewModel<Feed> {
         @Override
         public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Feed> callback) {
             //加载初始化数据的
-            Log.e("homeviewmodel", "loadInitial: ");
+            Log.e(TAG, "loadInitial: ");
             loadData(0, params.requestedLoadSize, callback);
             witchCache = false;
         }
@@ -57,7 +59,7 @@ public class HomeViewModel extends AbsViewModel<Feed> {
         @Override
         public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Feed> callback) {
             //向后加载分页数据的
-            Log.e("homeviewmodel", "loadAfter: ");
+            Log.e(TAG, "loadAfter: ");
             loadData(params.key, params.requestedLoadSize, callback);
         }
 
@@ -92,7 +94,7 @@ public class HomeViewModel extends AbsViewModel<Feed> {
             request.execute(new JsonCallback<List<Feed>>() {
                 @Override
                 public void onCacheSuccess(ApiResponse<List<Feed>> response) {
-                    Log.e("loadData", "onCacheSuccess: ");
+                    Log.e(TAG, "loadData onCacheSuccess: ");
                     MutablePageKeyedDataSource dataSource = new MutablePageKeyedDataSource<Feed>();
                     dataSource.data.addAll(response.body);
 
@@ -125,7 +127,7 @@ public class HomeViewModel extends AbsViewModel<Feed> {
             e.printStackTrace();
         }
 
-        Log.e("loadData", "loadData: key:" + key);
+        Log.e(TAG, "loadData: key:" + key);
 
     }
 

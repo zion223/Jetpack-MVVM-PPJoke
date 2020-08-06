@@ -23,7 +23,7 @@ public class AbsBindingAdapter {
 	}
 
 	@BindingAdapter(value = {"reloadRefreshState"})
-	public static void reloadRefreshLayoutState(SmartRefreshLayout refreshLayout, Object obj) {
+	public static void reloadRefreshLayoutState(SmartRefreshLayout refreshLayout, Object reload) {
 		RefreshState state = refreshLayout.getState();
 		if (state.isFooter && state.isOpening) {
 			refreshLayout.finishLoadMore();

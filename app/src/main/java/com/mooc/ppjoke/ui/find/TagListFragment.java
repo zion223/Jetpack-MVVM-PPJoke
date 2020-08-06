@@ -12,7 +12,6 @@ import androidx.paging.PagedListAdapter;
 
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.data.bean.TagList;
-import com.mooc.ppjoke.databinding.LayoutRefreshViewBinding;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.MutableItemKeyedDataSource;
 import com.mooc.ppjoke.ui.state.TagListViewModel;
