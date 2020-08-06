@@ -16,6 +16,9 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.mooc.libarchitecture.utils.ClickUtils;
 import com.mooc.libarchitecture.utils.Utils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 public class CommonBindingAdapter {
 
@@ -33,6 +36,16 @@ public class CommonBindingAdapter {
 	@BindingAdapter(value = {"offsetChangeListener"}, requireAll = false)
 	public static void setOffsetChangeListener(AppBarLayout appBarLayout, AppBarLayout.OnOffsetChangedListener offsetChangeListener) {
 		appBarLayout.addOnOffsetChangedListener(offsetChangeListener);
+	}
+
+	@BindingAdapter(value = {"onRefreshListener"}, requireAll = false)
+	public static void setOffsetChangeListener(SmartRefreshLayout refreshLayout, OnRefreshListener listener) {
+		refreshLayout.setOnRefreshListener(listener);
+	}
+
+	@BindingAdapter(value = {"onLoadMoreListener"}, requireAll = false)
+	public static void setOnLoadMoreListener(SmartRefreshLayout refreshLayout, OnLoadMoreListener listener) {
+		refreshLayout.setOnLoadMoreListener(listener);
 	}
 
 	@BindingAdapter(value = {"currentItem"}, requireAll = false)

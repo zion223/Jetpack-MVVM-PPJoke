@@ -12,6 +12,7 @@ import androidx.paging.PagedListAdapter;
 
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.data.bean.TagList;
+import com.mooc.ppjoke.databinding.LayoutRefreshViewBinding;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.MutableItemKeyedDataSource;
 import com.mooc.ppjoke.ui.state.TagListViewModel;
@@ -36,17 +37,18 @@ public class TagListFragment extends AbsListFragment<TagList, TagListViewModel> 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (TextUtils.equals(tagType, "onlyFollow")) {
-            mEmptyView.setTitle(getString(R.string.tag_list_no_follow));
-            mEmptyView.setButton(getString(R.string.tag_list_no_follow_button), new View.OnClickListener() {
+            ((LayoutRefreshViewBinding) getBinding()).emptyView.setTitle(getString(R.string.tag_list_no_follow));
+            ((LayoutRefreshViewBinding) getBinding()).emptyView.setButton(getString(R.string.tag_list_no_follow_button), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mViewModel.getSwitchTabLiveData().setValue(new Object());
                 }
             });
         }
-        mRecyclerView.removeItemDecorationAt(0);
+        ((LayoutRefreshViewBinding) getBinding()).recyclerView.removeItemDecorationAt(0);
         mViewModel.setTagType(tagType);
     }
+
 
     @Override
     public PagedListAdapter getAdapter() {

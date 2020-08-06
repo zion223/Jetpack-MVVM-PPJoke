@@ -12,9 +12,9 @@ import androidx.paging.PagedList;
 import androidx.paging.PagedListAdapter;
 
 import com.mooc.libnavannotation.FragmentDestination;
-import com.mooc.ppjoke.exoplayer.PageListPlayDetector;
-import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 import com.mooc.ppjoke.data.bean.Feed;
+import com.mooc.ppjoke.databinding.LayoutRefreshViewBinding;
+import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.MutablePageKeyedDataSource;
 import com.mooc.ppjoke.ui.state.HomeViewModel;
@@ -24,7 +24,7 @@ import java.util.List;
 
 @FragmentDestination(pageUrl = "main/tabs/home", asStarter = true)
 public class HomeFragment extends AbsListFragment<Feed, HomeViewModel> {
-    private PageListPlayDetector playDetector;
+    //private PageListPlayDetector playDetector;
     private String feedType;
     private boolean shouldPause = true;
 
@@ -38,13 +38,13 @@ public class HomeFragment extends AbsListFragment<Feed, HomeViewModel> {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mViewModel.getCacheLiveData().observe(getViewLifecycleOwner(), new Observer<PagedList<Feed>>() {
             @Override
             public void onChanged(PagedList<Feed> feeds) {
                 submitList(feeds);
             }
         });
-        playDetector = new PageListPlayDetector(this, mRecyclerView);
         mViewModel.setFeedType(feedType);
     }
 
@@ -76,7 +76,7 @@ public class HomeFragment extends AbsListFragment<Feed, HomeViewModel> {
                 //每调用一次 adpater.submitlist
                 if (previousList != null && currentList != null) {
                     if (!currentList.containsAll(previousList)) {
-                        mRecyclerView.scrollToPosition(0);
+                        ((LayoutRefreshViewBinding) getBinding()).recyclerView.scrollToPosition(0);
                     }
                 }
             }

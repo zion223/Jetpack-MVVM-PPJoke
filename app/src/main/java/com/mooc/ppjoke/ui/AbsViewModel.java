@@ -1,22 +1,28 @@
 package com.mooc.ppjoke.ui;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
+import androidx.paging.PagedListAdapter;
 
 public abstract class AbsViewModel<T> extends ViewModel {
 
 
     protected PagedList.Config config;
+
     private DataSource dataSource;
     private LiveData<PagedList<T>> pageData;
-
     private MutableLiveData<Boolean> boundaryPageData = new MutableLiveData<>();
+
+    public ObservableBoolean hasData = new ObservableBoolean();
+    public MutableLiveData<Object> reload = new MutableLiveData<>();
+    public ObservableField<PagedListAdapter> adapter = new ObservableField<>();
 
     public AbsViewModel() {
 
@@ -33,6 +39,8 @@ public abstract class AbsViewModel<T> extends ViewModel {
                 //.setFetchExecutor()
                 .setBoundaryCallback(callback)
                 .build();
+
+        hasData.set(false);
     }
 
 

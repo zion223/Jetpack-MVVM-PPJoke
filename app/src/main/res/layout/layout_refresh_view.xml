@@ -4,6 +4,16 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.mooc.ppjoke.ui.AbsViewModel" />
+
+        <variable
+            name="absFragment"
+            type="com.mooc.ppjoke.ui.AbsListFragment" />
+
+        <import type="android.view.View" />
+
     </data>
 
     <FrameLayout
@@ -13,6 +23,9 @@
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refresh_layout"
+            onLoadMoreListener="@{absFragment}"
+            onRefreshListener="@{absFragment}"
+            reloadRefreshState="@{vm.reload}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srlEnableLoadMore="true"
@@ -20,23 +33,25 @@
 
             <com.scwang.smartrefresh.layout.header.ClassicsHeader
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
+                adapter="@{vm.adapter}"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <com.scwang.smartrefresh.layout.footer.ClassicsFooter
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
         <com.mooc.libcommon.view.EmptyView
             android:id="@+id/empty_view"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="100dp"
-            android:layout_height="match_parent"/>
+            android:visibility="@{vm.hasData? View.GONE: View.VISIBLE}" />
     </FrameLayout>
 </layout>

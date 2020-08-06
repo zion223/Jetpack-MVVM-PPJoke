@@ -40,7 +40,6 @@ public class SofaFragment extends BaseFragment {
         mSofaViewModel.fragment.set(this);
         mSofaViewModel.tabConfig.set(getTabConfig());
         mSofaViewModel.type.set(0);
-
     }
 
     public SofaTab getTabConfig() {

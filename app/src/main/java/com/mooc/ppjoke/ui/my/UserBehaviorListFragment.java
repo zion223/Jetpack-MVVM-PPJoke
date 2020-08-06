@@ -8,9 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.paging.PagedList;
 import androidx.paging.PagedListAdapter;
 
-import com.mooc.ppjoke.exoplayer.PageListPlayDetector;
-import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 import com.mooc.ppjoke.data.bean.Feed;
+import com.mooc.ppjoke.exoplayer.PageListPlayManager;
 import com.mooc.ppjoke.ui.AbsListFragment;
 import com.mooc.ppjoke.ui.home.FeedAdapter;
 import com.mooc.ppjoke.ui.state.UserBehaviorViewModel;
@@ -19,7 +18,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 public class UserBehaviorListFragment extends AbsListFragment<Feed, UserBehaviorViewModel> {
     private static final String CATEGORY = "user_behavior_list";
     private boolean shouldPause = true;
-    private PageListPlayDetector playDetector;
 
     public static UserBehaviorListFragment newInstance(int behavior) {
 
@@ -33,7 +31,6 @@ public class UserBehaviorListFragment extends AbsListFragment<Feed, UserBehavior
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        playDetector = new PageListPlayDetector(this, mRecyclerView);
         int behavior = getArguments().getInt(UserBehaviorListActivity.KEY_BEHAVIOR);
         mViewModel.setBehavior(behavior);
     }
