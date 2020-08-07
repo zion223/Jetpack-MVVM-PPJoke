@@ -4,7 +4,6 @@ package com.mooc.ppjoke;
 import com.kunminx.architecture.BaseApplication;
 import com.mooc.libarchitecture.utils.Utils;
 import com.mooc.libnetwork.ApiService;
-import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * 咱们的服务器已经部署到公网了.
@@ -21,7 +20,5 @@ public class JokeApplication extends BaseApplication {
         super.onCreate();
         Utils.init(this);
         ApiService.init("http://123.56.232.18:8080/serverdemo", null);
-
-        CrashReport.initCrashReport(getApplicationContext(), "eb455a94a3", true);
     }
 }

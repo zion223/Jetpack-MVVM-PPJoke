@@ -59,9 +59,7 @@ dependencies {
     //QQ快捷登录
     implementation files('libs/open_sdk_r6140_lite.jar')
 
-    //错误收集
-    implementation 'com.tencent.bugly:crashreport:latest.release'
-    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+
     //jectpack 模块相关
     implementation 'com.google.android.material:material:1.3.0-alpha02'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
