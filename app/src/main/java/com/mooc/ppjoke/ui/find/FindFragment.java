@@ -44,7 +44,6 @@ public class FindFragment extends BaseFragment {
         mFindViewModel.tabConfig.set(getTabConfig());
         mFindViewModel.destroy.set(false);
         mFindViewModel.type.set(1);
-
     }
 
     @Override
@@ -54,14 +53,11 @@ public class FindFragment extends BaseFragment {
         if (TextUtils.equals(tagType, "onlyFollow")) {
             //跳转去推荐页面
             ViewModelProviders.of(childFragment).get(TagListViewModel.class)
-                    .getSwitchTabLiveData().observe(this, new Observer() {
-                @Override
-                public void onChanged(Object o) {
-                    //TODO  设置同样的值 BindingAdapter中的方法不会重复执行
-                    // 采用了笨方法 后续待改进
-                    mFindViewModel.currentItem.set(1);
-                    mFindViewModel.currentItem.set(2);
-                }
+                    .getSwitchTabLiveData().observe(this, o -> {
+                //TODO  设置同样的值 BindingAdapter中的方法不会重复执行
+                // 采用了笨方法 后续待改进
+                mFindViewModel.currentItem.set(1);
+                mFindViewModel.currentItem.set(2);
             });
         }
     }
