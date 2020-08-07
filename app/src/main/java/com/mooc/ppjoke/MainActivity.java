@@ -84,11 +84,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 		//遍历 target destination 是否需要登录拦截
 		for (Map.Entry<String, Destination> entry : destConfig.entrySet()) {
 			Destination value = entry.getValue();
-			if (value != null && !UserManager.get().isLogin() && value.needLogin && value.id == menuItem.getItemId()) {
+			if (value != null && value.id == menuItem.getItemId() && value.needLogin && !UserManager.get().isLogin()) {
 
 				UserManager.get().login(this).observe(this, user -> {
 					if (user != null) {
-						//即时移除observers  避免重复收到LiveData消息
+						//及时移除observers  避免重复收到LiveData消息
 						UserManager.get().getUserLiveData().removeObservers(MainActivity.this);
 						navView.setSelectedItemId(menuItem.getItemId());
 					}

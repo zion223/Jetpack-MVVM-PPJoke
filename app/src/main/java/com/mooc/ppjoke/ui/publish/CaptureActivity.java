@@ -9,12 +9,10 @@ import android.content.pm.PackageManager;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Rational;
 import android.util.Size;
 import android.view.Surface;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

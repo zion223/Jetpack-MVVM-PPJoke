@@ -85,7 +85,7 @@ public class AppBottomBar extends BottomNavigationView {
                 //禁止掉点按时 上下浮动的效果
                 itemView.setShifting(false);
 
-                /**
+                /*
                  * 如果想要禁止掉所有按钮的点击浮动效果。
                  * 那么还需要给选中和未选中的按钮配置一样大小的字号。
                  *

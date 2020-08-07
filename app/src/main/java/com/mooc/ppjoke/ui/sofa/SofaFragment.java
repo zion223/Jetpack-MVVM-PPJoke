@@ -19,7 +19,7 @@ import com.mooc.ppjoke.utils.AppConfig;
 import java.util.List;
 
 
-@FragmentDestination(pageUrl = "main/tabs/sofa", asStarter = false)
+@FragmentDestination(pageUrl = "main/tabs/sofa")
 public class SofaFragment extends BaseFragment {
 
     public SofaViewModel mSofaViewModel;
