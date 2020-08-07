@@ -42,13 +42,12 @@ public class InteractionPresenter {
 
     //给一个帖子点赞/取消点赞，它和给帖子点踩一踩是互斥的
     public static void toggleFeedLike(LifecycleOwner owner, Feed feed) {
-        if (!isLogin(owner, new Observer<User>() {
+        if (isLogin(owner, new Observer<User>() {
             @Override
             public void onChanged(User user) {
                 toggleFeedLikeInternal(feed);
             }
         })) {
-        } else {
             toggleFeedLikeInternal(feed);
         }
     }
@@ -61,7 +60,7 @@ public class InteractionPresenter {
                     @Override
                     public void onSuccess(ApiResponse<JSONObject> response) {
                         if (response.body != null) {
-                            boolean hasLiked = response.body.getBoolean("hasLiked").booleanValue();
+                            boolean hasLiked = response.body.getBoolean("hasLiked");
                             feed.getUgc().setHasLiked(hasLiked);
                             LiveDataBus.get().with(DATA_FROM_INTERACTION)
                                     .postValue(feed);
@@ -95,7 +94,7 @@ public class InteractionPresenter {
                     @Override
                     public void onSuccess(ApiResponse<JSONObject> response) {
                         if (response.body != null) {
-                            boolean hasLiked = response.body.getBoolean("hasLiked").booleanValue();
+                            boolean hasLiked = response.body.getBoolean("hasLiked");
                             feed.getUgc().setHasdiss(hasLiked);
                         }
                     }

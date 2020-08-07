@@ -60,10 +60,10 @@ public abstract class AbsListFragment<T, M extends AbsViewModel<T>> extends Base
 		playDetector = new PageListPlayDetector(this, ((LayoutRefreshViewBinding) getBinding()).recyclerView);
 
 		//触发页面初始化数据加载的逻辑
-		mViewModel.getPageData().observe(getViewLifecycleOwner(), pagedList -> submitList(pagedList));
+		mViewModel.getPageData().observe(getViewLifecycleOwner(), this::submitList);
 
 		//监听分页时有无更多数据,以决定是否关闭上拉加载的动画
-		mViewModel.getBoundaryPageData().observe(getViewLifecycleOwner(), hasData -> finishRefresh(hasData));
+		mViewModel.getBoundaryPageData().observe(getViewLifecycleOwner(), this::finishRefresh);
 	}
 
 
@@ -101,5 +101,5 @@ public abstract class AbsListFragment<T, M extends AbsViewModel<T>> extends Base
 	 *
 	 * @return PagedListAdapter
 	 */
-	public abstract PagedListAdapter getAdapter();
+	public abstract PagedListAdapter<T, RecyclerView.ViewHolder> getAdapter();
 }

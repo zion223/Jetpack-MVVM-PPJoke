@@ -41,7 +41,9 @@ public abstract class AbsViewModel<T> extends ViewModel {
 	public AbsViewModel() {
 
 		config = new PagedList.Config.Builder()
+				//Defines the number of items loaded at once from the DataSource.
 				.setPageSize(10)
+				//Defines how many items to load when first load occurs.
 				.setInitialLoadSizeHint(12)
 				// .setMaxSize(100)；
 				// .setEnablePlaceholders(false)

@@ -77,9 +77,7 @@ public abstract class Request<T, R extends Request> implements Cloneable {
                     params.put(key, value);
                 }
             }
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return (R) this;
@@ -109,8 +107,7 @@ public abstract class Request<T, R extends Request> implements Cloneable {
         okhttp3.Request.Builder builder = new okhttp3.Request.Builder();
         addHeaders(builder);
         okhttp3.Request request = generateRequest(builder);
-        Call call = ApiService.okHttpClient.newCall(request);
-        return call;
+        return ApiService.okHttpClient.newCall(request);
     }
 
     protected abstract okhttp3.Request generateRequest(okhttp3.Request.Builder builder);

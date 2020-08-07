@@ -41,7 +41,7 @@ public class FeedDetailViewModel extends AbsViewModel<Comment> {
         }
 
         private void loadData(Integer key, int requestedLoadSize, LoadCallback<Comment> callback) {
-            ApiResponse<List<Comment>> response = ApiService.get("/comment/queryFeedComments")
+            ApiResponse<ArrayList<Comment>> response = ApiService.get("/comment/queryFeedComments")
                     .addParam("id", key)
                     .addParam("itemId", itemId)
                     .addParam("userId", UserManager.get().getUserId())
