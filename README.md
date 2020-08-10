@@ -1,5 +1,5 @@
 ## Jetpack-MVVM-PPJoke
-Jetpack MVVM最佳实践 开发短视频应用 客户端  
+Jetpack MVVM最佳实践 开发短视频应用 客户端
 使用 KunMinX的[开源项目](https://github.com/KunMinX/Jetpack-MVVM-Best-Practice)中架构思想 重构此课程代码
 
 
@@ -19,7 +19,4 @@ Jetpack MVVM最佳实践 开发短视频应用 客户端
 ##### 请注意，每个组件仅依赖于其下一级的组件。例如，Activity 和 Fragment 仅依赖于视图模型。存储区是唯一依赖于其他多个类的类；在本例中，存储区依赖于持久性数据模型和远程后端数据源
 
 
-## [开发笔记](https://git.imooc.com/coding-402/ppjoke_jetpack/src/master/jetpack%e5%ae%a2%e6%88%b7%e7%ab%af%e5%bc%80%e5%8f%91%e7%ac%94%e8%ae%b0.md)
-
-## [服务器&数据库配置文档](https://git.imooc.com/coding-402/ppjoke_jetpack/src/master/%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba.md)
 
