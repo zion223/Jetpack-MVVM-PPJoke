@@ -29,6 +29,19 @@ public abstract class AbsPagedListAdapter<T, VH extends RecyclerView.ViewHolder>
         super(diffCallback);
     }
 
+
+    private OnItemClickListener<T> mOnItemClickListener;
+    private OnItemLongClickListener<T> mOnItemLongClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener<T> onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
+    }
+
+
     public void addHeaderView(View view) {
         //判断给View对象是否还没有处在mHeaders数组里面
         if (mHeaders.indexOfValue(view) < 0) {
@@ -121,9 +134,22 @@ public abstract class AbsPagedListAdapter<T, VH extends RecyclerView.ViewHolder>
             return (VH) new RecyclerView.ViewHolder(view) {
             };
         }
-
-
-        return onCreateViewHolder2(parent, viewType);
+        VH vh = onCreateViewHolder2(parent, viewType);
+        vh.itemView.setOnClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                int position = vh.getBindingAdapterPosition();
+                mOnItemClickListener.onItemClick(getItem(position), position);
+            }
+        });
+        vh.itemView.setOnLongClickListener(v -> {
+            if (mOnItemLongClickListener != null) {
+                int position = vh.getBindingAdapterPosition();
+                mOnItemLongClickListener.onItemLongClick(getItem(position), position);
+                return true;
+            }
+            return false;
+        });
+        return vh;
     }
 
     protected abstract VH onCreateViewHolder2(ViewGroup parent, int viewType);
@@ -200,7 +226,13 @@ public abstract class AbsPagedListAdapter<T, VH extends RecyclerView.ViewHolder>
         public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
             mObserver.onItemRangeMoved(fromPosition + mHeaders.size(), toPosition + mHeaders.size(), itemCount);
         }
+    }
 
+    public interface OnItemClickListener<M> {
+        void onItemClick(M item, int position);
+    }
 
+    public interface OnItemLongClickListener<M> {
+        void onItemLongClick(M item, int position);
     }
 }

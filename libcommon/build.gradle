@@ -21,6 +21,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility "1.8"
+        targetCompatibility "1.8"
+    }
+
     dataBinding{
         enabled=true
     }
@@ -35,7 +40,7 @@ dependencies {
 
     //material组件
     api 'com.google.android.material:material:1.1.0-alpha10'
-
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
     //约束布局
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
 

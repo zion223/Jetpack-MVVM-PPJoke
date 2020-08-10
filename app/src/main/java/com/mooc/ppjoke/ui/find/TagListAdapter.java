@@ -31,6 +31,7 @@ public class TagListAdapter extends AbsPagedListAdapter<TagList, TagListAdapter.
                 return oldItem.equals(newItem);
             }
         });
+        setOnItemClickListener((item, position) -> TagFeedListActivity.startActivity(mContext, item));
         mContext = context;
         mInflater = LayoutInflater.from(context);
     }
@@ -46,10 +47,9 @@ public class TagListAdapter extends AbsPagedListAdapter<TagList, TagListAdapter.
         final TagList item = getItem(position);
         holder.bindData(item);
         holder.mItemBinding.actionFollow.setOnClickListener(v -> InteractionPresenter.toggleTagLike(((LifecycleOwner) mContext), item));
-        holder.itemView.setOnClickListener(v -> TagFeedListActivity.startActivity(mContext, item));
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private LayoutTagListItemBinding mItemBinding;
 
         public ViewHolder(@NonNull View itemView, LayoutTagListItemBinding itemBinding) {

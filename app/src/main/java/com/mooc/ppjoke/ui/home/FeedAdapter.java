@@ -42,6 +42,17 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
                 return oldItem.equals(newItem);
             }
         });
+        setOnItemClickListener((item, position) -> {
+            FeedDetailActivity.startFeedDetailActivity(mContext, item, mCategory);
+            onStartFeedDetailActivity(item);
+            if (mFeedObserver == null) {
+                mFeedObserver = new FeedObserver();
+                LiveDataBus.get()
+                        .with(InteractionPresenter.DATA_FROM_INTERACTION)
+                        .observe((LifecycleOwner) mContext, mFeedObserver);
+            }
+            mFeedObserver.setFeed(item);
+        });
 
         inflater = LayoutInflater.from(context);
         mContext = context;
@@ -69,23 +80,7 @@ public class FeedAdapter extends AbsPagedListAdapter<Feed, FeedAdapter.ViewHolde
     @Override
     protected void onBindViewHolder2(ViewHolder holder, int position) {
         final Feed feed = getItem(position);
-
         holder.bindData(feed);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FeedDetailActivity.startFeedDetailActivity(mContext, feed, mCategory);
-                onStartFeedDetailActivity(feed);
-                if (mFeedObserver == null) {
-                    mFeedObserver = new FeedObserver();
-                    LiveDataBus.get()
-                            .with(InteractionPresenter.DATA_FROM_INTERACTION)
-                            .observe((LifecycleOwner) mContext, mFeedObserver);
-                }
-                mFeedObserver.setFeed(feed);
-            }
-        });
     }
 
     public void onStartFeedDetailActivity(Feed feed) {
