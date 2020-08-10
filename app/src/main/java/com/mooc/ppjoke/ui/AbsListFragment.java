@@ -39,7 +39,8 @@ public abstract class AbsListFragment<T, M extends AbsViewModel<T>> extends Base
 	@Override
 	protected DataBindingConfig getDataBindingConfig() {
 		return new DataBindingConfig(R.layout.layout_refresh_view, BR.vm, mViewModel)
-				.addBindingParam(BR.absFragment, this);
+				.addBindingParam(BR.loadmorelistener, this)
+				.addBindingParam(BR.refreshlistener, this);
 	}
 
 

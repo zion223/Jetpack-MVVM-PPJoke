@@ -13,8 +13,19 @@
             name="owner"
             type="androidx.lifecycle.LifecycleOwner" />
 
-        <import type="com.mooc.ppjoke.ui.InteractionPresenter" />
+        <variable
+            name="vm"
+            type="com.mooc.ppjoke.ui.AbsViewModel" />
 
+        <variable
+            name="loadmore"
+            type="com.scwang.smartrefresh.layout.listener.OnLoadMoreListener" />
+
+        <variable
+            name="refresh"
+            type="com.scwang.smartrefresh.layout.listener.OnRefreshListener" />
+
+        <import type="com.mooc.ppjoke.ui.InteractionPresenter" />
     </data>
 
     <com.mooc.libcommon.view.WindowInsetsFrameLayout
@@ -24,7 +35,10 @@
 
         <include
             android:id="@+id/refresh_layout"
-            layout="@layout/layout_refresh_view" />
+            layout="@layout/layout_refresh_view"
+            app:vm="@{vm}"
+            app:loadmorelistener="@{loadmore}"
+            app:refreshlistener="@{refresh}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/top_bar"
@@ -79,7 +93,7 @@
                 android:paddingTop="@dimen/dp_0"
                 android:paddingRight="@dimen/dp_0"
                 android:paddingBottom="@dimen/dp_0"
-                android:text="@{tagList.hasFollow?@string/tag_follow:@string/tag_unfollow}"
+                android:text="@{tagList.hasFollow? @string/tag_follow: @string/tag_unfollow}"
                 android:textColor="@color/color_white"
                 android:textSize="13sp"
                 app:backgroundTint="@color/color_theme"

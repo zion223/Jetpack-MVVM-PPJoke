@@ -23,6 +23,7 @@ import com.mooc.libcommon.extention.AbsPagedListAdapter;
 import com.mooc.libcommon.utils.PixUtils;
 import com.mooc.libcommon.utils.StatusBar;
 import com.mooc.libcommon.view.EmptyView;
+import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.databinding.ActivityLayoutTagFeedListBinding;
 import com.mooc.ppjoke.databinding.LayoutTagFeedListHeaderBinding;
@@ -81,15 +82,19 @@ public class TagFeedListActivity extends AppCompatActivity implements View.OnCli
         refreshLayout.setOnLoadMoreListener(this);
 
         tagList = (TagList) getIntent().getSerializableExtra(KEY_TAG_LIST);
+        //设置DataBinging数据
         binding.setTagList(tagList);
         binding.setOwner(this);
-
         tagFeedListViewModel = ViewModelProviders.of(this).get(TagFeedListViewModel.class);
         tagFeedListViewModel.setFeedType(tagList.title);
         tagFeedListViewModel.getPageData().observe(this, feeds -> submitList(feeds));
         tagFeedListViewModel.getBoundaryPageData().observe(this, hasData -> finishRefresh(hasData));
-
+        tagFeedListViewModel.enableRefresh.setValue(true);
         playDetector = new PageListPlayDetector(this, recyclerView);
+
+        binding.setVariable(BR.vm, tagFeedListViewModel);
+        binding.setVariable(BR.loadmorelistener, this);
+        binding.setVariable(BR.refreshlistener, this);
 
         addHeaderView();
     }
