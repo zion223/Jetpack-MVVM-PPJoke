@@ -76,6 +76,7 @@ public class UserManager {
             return login(AppGlobals.getApplication());
         }
         MutableLiveData<User> liveData = new MutableLiveData<>();
+        //查询用户
         ApiService.get("/user/query")
                 .addParam("userId", getUserId())
                 .execute(new JsonCallback<User>() {

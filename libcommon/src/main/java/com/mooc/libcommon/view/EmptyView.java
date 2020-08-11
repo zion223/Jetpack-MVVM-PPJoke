@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,9 +19,9 @@ import androidx.databinding.BindingAdapter;
 import com.mooc.libcommon.R;
 
 public class EmptyView extends LinearLayout {
-    private ImageView icon;
-    private TextView title;
-    private Button action;
+    private ImageView mIvIcon;
+    private TextView mTvTitle;
+    private Button mBtAction;
 
     public EmptyView(@NonNull Context context) {
         this(context, null);
@@ -42,22 +41,22 @@ public class EmptyView extends LinearLayout {
         setGravity(Gravity.CENTER);
         LayoutInflater.from(context).inflate(R.layout.layout_empty_view, this, true);
 
-        icon = findViewById(R.id.empty_icon);
-        title = findViewById(R.id.empty_text);
-        action = findViewById(R.id.empty_action);
+        mIvIcon = findViewById(R.id.empty_icon);
+        mTvTitle = findViewById(R.id.empty_text);
+        mBtAction = findViewById(R.id.empty_action);
     }
 
 
     public void setEmptyIcon(@DrawableRes int iconRes) {
-        icon.setImageResource(iconRes);
+        mIvIcon.setImageResource(iconRes);
     }
 
     public void setTitle(String text) {
         if (TextUtils.isEmpty(text)) {
-            title.setVisibility(GONE);
+            mTvTitle.setVisibility(GONE);
         } else {
-            title.setText(text);
-            title.setVisibility(VISIBLE);
+            mTvTitle.setText(text);
+            mTvTitle.setVisibility(VISIBLE);
         }
     }
 
@@ -65,16 +64,16 @@ public class EmptyView extends LinearLayout {
     @BindingAdapter(value = {"emptyViewTitle", "emptyViewButtonTitle", "emptyViewButtonListener"})
     public static void setEmptyViewTitle(EmptyView view, String text, String title, OnClickListener listener) {
         view.setTitle(text);
-        view.setButton(title, listener);
+        view.initButton(title, listener);
     }
 
-    public void setButton(String text, View.OnClickListener listener) {
+    public void initButton(String text, View.OnClickListener listener) {
         if (TextUtils.isEmpty(text)) {
-            action.setVisibility(GONE);
+            mBtAction.setVisibility(GONE);
         } else {
-            action.setText(text);
-            action.setVisibility(VISIBLE);
-            action.setOnClickListener(listener);
+            mBtAction.setText(text);
+            mBtAction.setVisibility(VISIBLE);
+            mBtAction.setOnClickListener(listener);
         }
 
     }

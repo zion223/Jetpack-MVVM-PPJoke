@@ -29,10 +29,8 @@ public class CommentRequest extends BaseRequest {
 
 	public void requestComment(long itemId, String commentText, boolean isVideo, int width, int height, String coverUrl, String fileUrl) {
 		DataRepository.getInstance().addComment(itemId, commentText, isVideo, width, height, coverUrl, fileUrl, new DataResult<>((comment, netState, message) -> {
-			if (comment != null) {
-				commentStatus.setValue(comment);
-			} else {
-				commentStatus.setValue(null);
+			commentStatus.setValue(comment);
+			if (comment == null) {
 				commentMessage.setValue("评论失败:" + message);
 			}
 		}));

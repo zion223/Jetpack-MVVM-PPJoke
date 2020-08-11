@@ -42,16 +42,12 @@ public class InteractionPresenter {
 
     //给一个帖子点赞/取消点赞，它和给帖子点踩一踩是互斥的
     public static void toggleFeedLike(LifecycleOwner owner, Feed feed) {
-        if (isLogin(owner, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                toggleFeedLikeInternal(feed);
-            }
-        })) {
+        if (isLogin(owner, user -> toggleFeedLikeInternal(feed))) {
             toggleFeedLikeInternal(feed);
         }
     }
 
+    //变更用户对该条段子的喜欢结果
     private static void toggleFeedLikeInternal(Feed feed) {
         ApiService.get(URL_TOGGLE_FEED_LIK)
                 .addParam("userId", UserManager.get().getUserId())
@@ -76,17 +72,12 @@ public class InteractionPresenter {
 
     //给一个帖子点踩一踩/取消踩一踩,它和给帖子点赞是互斥的
     public static void toggleFeedDiss(LifecycleOwner owner, Feed feed) {
-        if (!isLogin(owner, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                toggleFeedDissInternal(feed);
-            }
-        })) {
-        } else {
+        if (isLogin(owner, user -> toggleFeedDissInternal(feed))) {
             toggleFeedDissInternal(feed);
         }
     }
 
+    //变更用户对一个帖子的diss状态
     private static void toggleFeedDissInternal(Feed feed) {
         ApiService.get(URL_TOGGLE_FEED_DISS).addParam("userId", UserManager.get().getUserId())
                 .addParam("itemId", feed.itemId)
@@ -144,17 +135,12 @@ public class InteractionPresenter {
 
     //给一个帖子的评论点赞/取消点赞
     public static void toggleCommentLike(LifecycleOwner owner, Comment comment) {
-        if (!isLogin(owner, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                toggleCommentLikeInternal(comment);
-            }
-        })) {
-        } else {
+        if (isLogin(owner, user -> toggleCommentLikeInternal(comment))) {
             toggleCommentLikeInternal(comment);
         }
     }
 
+    //变更用户对一条评论的喜欢状态
     private static void toggleCommentLikeInternal(Comment comment) {
 
         ApiService.get(URL_TOGGLE_COMMENT_LIKE)
@@ -178,17 +164,12 @@ public class InteractionPresenter {
 
     //收藏/取消收藏一个帖子
     public static void toggleFeedFavorite(LifecycleOwner owner, Feed feed) {
-        if (!isLogin(owner, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                toggleFeedFavorite(feed);
-            }
-        })) {
-        } else {
+        if (isLogin(owner, user -> toggleFeedFavorite(feed))) {
             toggleFeedFavorite(feed);
         }
     }
 
+    //收藏一个帖子
     private static void toggleFeedFavorite(Feed feed) {
         ApiService.get("/ugc/toggleFavorite")
                 .addParam("itemId", feed.itemId)
@@ -214,17 +195,12 @@ public class InteractionPresenter {
 
     //关注/取消关注一个用户
     public static void toggleFollowUser(LifecycleOwner owner, Feed feed) {
-        if (!isLogin(owner, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                toggleFollowUser(feed);
-            }
-        })) {
-        } else {
+        if (isLogin(owner, user -> toggleFollowUser(feed))) {
             toggleFollowUser(feed);
         }
     }
 
+    //变更用户对另一个用户的喜欢状态
     private static void toggleFollowUser(Feed feed) {
         ApiService.get("/ugc/toggleUserFollow")
                 .addParam("followUserId", UserManager.get().getUserId())
@@ -313,17 +289,12 @@ public class InteractionPresenter {
 
     //关注/取消关注一个帖子标签
     public static void toggleTagLike(LifecycleOwner owner, TagList tagList) {
-        if (!isLogin(owner, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                toggleTagLikeInternal(tagList);
-            }
-        })) ;
-        else {
+        if (isLogin(owner, user -> toggleTagLikeInternal(tagList))) {
             toggleTagLikeInternal(tagList);
         }
     }
 
+    //变更对某个标签的喜欢
     private static void toggleTagLikeInternal(TagList tagList) {
         ApiService.get("/tag/toggleTagFollow")
                 .addParam("tagId", tagList.tagId)

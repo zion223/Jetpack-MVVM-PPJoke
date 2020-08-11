@@ -60,6 +60,7 @@ public class TagBottomSheetDialogFragment extends BottomSheetDialogFragment {
         return dialog;
     }
 
+    //查询tagList数据
     private void queryTagList() {
         ApiService.get("/tag/queryTagList")
                 .addParam("userId", UserManager.get().getUserId())
