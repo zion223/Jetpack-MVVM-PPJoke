@@ -8,8 +8,6 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.arch.core.executor.ArchTaskExecutor;
 
-//import com.mooc.libnetwork.cache.CacheManager;
-
 import com.mooc.libnetwork.cache.CacheManager;
 
 import org.jetbrains.annotations.NotNull;
@@ -140,7 +138,7 @@ public abstract class Request<T, R extends Request> implements Cloneable {
     }
 
     @SuppressLint("RestrictedApi")
-    public void execute(final JsonCallback callback) {
+    public void execute(final JsonCallback<T> callback) {
         if (mCacheStrategy != NET_ONLY) {
             ArchTaskExecutor.getIOThreadExecutor().execute(new Runnable() {
                 @Override
@@ -220,7 +218,7 @@ public abstract class Request<T, R extends Request> implements Cloneable {
         result.status = status;
         result.message = message;
 
-        if (mCacheStrategy != NET_ONLY && result.success && result.body != null && result.body instanceof Serializable) {
+        if (mCacheStrategy != NET_ONLY && result.success && result.body instanceof Serializable) {
             saveCache(result.body);
         }
         return result;
