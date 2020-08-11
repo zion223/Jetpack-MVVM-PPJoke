@@ -89,7 +89,6 @@ public class TagFeedListActivity extends AppCompatActivity implements View.OnCli
         tagFeedListViewModel.setFeedType(tagList.title);
         tagFeedListViewModel.getPageData().observe(this, feeds -> submitList(feeds));
         tagFeedListViewModel.getBoundaryPageData().observe(this, hasData -> finishRefresh(hasData));
-        tagFeedListViewModel.enableRefresh.setValue(true);
         playDetector = new PageListPlayDetector(this, recyclerView);
 
         binding.setVariable(BR.vm, tagFeedListViewModel);

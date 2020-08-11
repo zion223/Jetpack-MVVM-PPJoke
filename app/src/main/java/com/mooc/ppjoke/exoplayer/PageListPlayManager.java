@@ -41,7 +41,7 @@ public class PageListPlayManager {
         //把缓存对象cache和负责缓存数据读取、写入的工厂类CacheDataSinkFactory 相关联
         CacheDataSinkFactory cacheDataSinkFactory = new CacheDataSinkFactory(cache, Long.MAX_VALUE);
 
-        /**创建能够 边播放边缓存的 本地资源加载和http网络数据写入的工厂类
+        /*创建能够 边播放边缓存的 本地资源加载和http网络数据写入的工厂类
          * public CacheDataSourceFactory(
          *       Cache cache, 缓存写入策略和缓存写入位置的对象
          *       DataSource.Factory upstreamFactory,http视频资源如何加载的工厂对象

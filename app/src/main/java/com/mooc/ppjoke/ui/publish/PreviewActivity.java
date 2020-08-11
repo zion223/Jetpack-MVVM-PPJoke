@@ -23,6 +23,8 @@ import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.ui.state.PreviewViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 
 public class PreviewActivity extends BaseActivity {
@@ -80,24 +82,7 @@ public class PreviewActivity extends BaseActivity {
     private void previewVideo(String previewUrl) {
         player = ExoPlayerFactory.newSimpleInstance(this, new DefaultRenderersFactory(this), new DefaultTrackSelector(), new DefaultLoadControl());
 
-        Uri uri = null;
-        File file = new File(previewUrl);
-        if (file.exists()) {
-            DataSpec dataSpec = new DataSpec(Uri.fromFile(file));
-            FileDataSource fileDataSource = new FileDataSource();
-            try {
-                fileDataSource.open(dataSpec);
-                uri = fileDataSource.getUri();
-            } catch (FileDataSource.FileDataSourceException e) {
-                e.printStackTrace();
-            }
-        } else {
-            uri = Uri.parse(previewUrl);
-        }
-
-        ProgressiveMediaSource.Factory factory = new ProgressiveMediaSource.Factory(new DefaultDataSourceFactory(this, Util.getUserAgent(this, getPackageName())));
-        ProgressiveMediaSource mediaSource = factory.createMediaSource(uri);
-        player.prepare(mediaSource);
+        player.prepare(createMediaSource(previewUrl));
         player.setPlayWhenReady(true);
         mPreviewViewModel.player.set(player);
     }
@@ -131,14 +116,36 @@ public class PreviewActivity extends BaseActivity {
 
     public class ClickProxy{
 
-        public void acionClose(){
+        public void acionClose() {
             finish();
         }
 
-        public void actionOk(){
+        public void actionOk() {
             setResult(RESULT_OK, new Intent());
             finish();
         }
+    }
+
+
+    @NotNull
+    private ProgressiveMediaSource createMediaSource(String previewUrl) {
+        Uri uri = null;
+        File file = new File(previewUrl);
+        if (file.exists()) {
+            DataSpec dataSpec = new DataSpec(Uri.fromFile(file));
+            FileDataSource fileDataSource = new FileDataSource();
+            try {
+                fileDataSource.open(dataSpec);
+                uri = fileDataSource.getUri();
+            } catch (FileDataSource.FileDataSourceException e) {
+                e.printStackTrace();
+            }
+        } else {
+            uri = Uri.parse(previewUrl);
+        }
+
+        ProgressiveMediaSource.Factory factory = new ProgressiveMediaSource.Factory(new DefaultDataSourceFactory(this, Util.getUserAgent(this, getPackageName())));
+        return factory.createMediaSource(uri);
     }
 
 }

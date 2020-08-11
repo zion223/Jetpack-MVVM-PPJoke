@@ -22,7 +22,6 @@ import java.util.List;
 
 public class AppBottomBar extends BottomNavigationView {
     private static int[] sIcons = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_sofa, R.drawable.icon_tab_publish, R.drawable.icon_tab_find, R.drawable.icon_tab_mine};
-    private BottomBar config;
 
     public AppBottomBar(Context context) {
         this(context, null);
@@ -36,7 +35,7 @@ public class AppBottomBar extends BottomNavigationView {
     public AppBottomBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        config = AppConfig.getBottomBarConfig();
+        final BottomBar config = AppConfig.getBottomBarConfig();
 
         int[][] state = new int[2][];
         state[0] = new int[]{android.R.attr.state_selected};
