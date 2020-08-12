@@ -42,7 +42,6 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
-                adapter="@{vm.adapter}"
                 removedItemDecoration="@{vm.removedItemDecoration}"
                 scrollToPosition="@{vm.scrollToPosition}"
                 android:layout_width="match_parent"

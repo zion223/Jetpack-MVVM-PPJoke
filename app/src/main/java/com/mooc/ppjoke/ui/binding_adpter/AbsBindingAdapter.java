@@ -10,18 +10,6 @@ import com.scwang.smartrefresh.layout.constant.RefreshState;
 public class AbsBindingAdapter {
 
 
-	@BindingAdapter(value = {"adapter"})
-	public static void initAbsRecyclerView(RecyclerView recyclerView, PagedListAdapter adapter) {
-//		//recyclerView.setAdapter(adapter);
-//		recyclerView.setLayoutManager(new LinearLayoutManager(Utils.getApp().getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-//		recyclerView.setItemAnimator(null);
-//
-//		//默认给列表中的Item 一个 10dp的ItemDecoration
-//		DividerItemDecoration decoration = new DividerItemDecoration(Utils.getApp().getApplicationContext(), LinearLayoutManager.VERTICAL);
-//		decoration.setDrawable(ContextCompat.getDrawable(Utils.getApp().getApplicationContext(), R.drawable.list_divider));
-//		recyclerView.addItemDecoration(decoration);
-	}
-
 	@BindingAdapter(value = {"reloadRefreshState"})
 	public static void reloadRefreshLayoutState(SmartRefreshLayout refreshLayout, Object reload) {
 		RefreshState state = refreshLayout.getState();
