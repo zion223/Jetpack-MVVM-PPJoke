@@ -66,10 +66,13 @@ public class ShareDialog extends AlertDialog {
         layout.addView(gridView, params);
 
         setContentView(layout);
-        getWindow().setGravity(Gravity.BOTTOM);
+        if(getWindow() != null){
+            getWindow().setGravity(Gravity.BOTTOM);
 
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+
 
         queryShareItems();
 

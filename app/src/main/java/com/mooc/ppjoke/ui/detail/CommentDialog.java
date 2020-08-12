@@ -61,7 +61,9 @@ public class CommentDialog extends DialogDataBindingFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.itemId = getArguments().getLong(KEY_ITEM_ID);
+		if(getArguments() != null){
+			itemId = getArguments().getLong(KEY_ITEM_ID);
+		}
 
 		mCommentViewModel.commentRequest.getCommentMessage().observe(this, this::showShortToast);
 
