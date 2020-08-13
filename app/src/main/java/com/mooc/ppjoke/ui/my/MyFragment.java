@@ -22,6 +22,17 @@ public class MyFragment extends BaseFragment {
 
 	private MyViewModel myViewModel;
 
+	@Override
+	protected DataBindingConfig getDataBindingConfig() {
+		return new DataBindingConfig(R.layout.fragment_my, BR.vm, myViewModel)
+				.addBindingParam(BR.proxy, new ClickProxy());
+	}
+
+	@Override
+	protected void initViewModel() {
+		myViewModel = getFragmentViewModel(MyViewModel.class);
+	}
+
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -38,21 +49,11 @@ public class MyFragment extends BaseFragment {
 
 
 	@Override
-	protected void initViewModel() {
-		myViewModel = getFragmentViewModel(MyViewModel.class);
-	}
-
-	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		StatusBar.lightStatusBar(getActivity(), false);
 		super.onCreate(savedInstanceState);
 	}
 
-	@Override
-	protected DataBindingConfig getDataBindingConfig() {
-		return new DataBindingConfig(R.layout.fragment_my, BR.vm, myViewModel)
-				.addBindingParam(BR.proxy, new ClickProxy());
-	}
 
 	@Override
 	public void onHiddenChanged(boolean hidden) {
