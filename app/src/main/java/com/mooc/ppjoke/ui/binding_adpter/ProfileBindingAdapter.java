@@ -13,7 +13,7 @@ import com.mooc.libarchitecture.utils.Utils;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.ui.my.ProfileListFragment;
 
-public class ProfileBindingAadapter {
+public class ProfileBindingAdapter {
 
 	public static final String TAB_TYPE_ALL = "tab_all";
 	public static final String TAB_TYPE_FEED = "tab_feed";
