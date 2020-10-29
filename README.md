@@ -1,6 +1,7 @@
 ## Jetpack-MVVM-PPJoke
 Jetpack MVVM最佳实践 开发短视频应用 客户端
 使用 KunMinX的[开源项目](https://github.com/KunMinX/Jetpack-MVVM-Best-Practice)中架构思想 重构此课程代码
+与项目配合的后端代码点[这里](https://github.com/zion223/PPJoke-Web)
 
 
 ###  Jetpack架构原则(摘自谷歌官方文档)
