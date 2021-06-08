@@ -47,6 +47,8 @@ import java.util.Map;
  * <p>
  * 3.底部导航栏 和 内容区域的 切换联动 使用NavController驱动
  * 4.底部导航栏 按钮个数和 内容区域destination个数。由注解处理器NavProcessor来收集,生成assetsdestination.json。而后我们解析它。
+ *
+ * @author Zhangruiping
  */
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 

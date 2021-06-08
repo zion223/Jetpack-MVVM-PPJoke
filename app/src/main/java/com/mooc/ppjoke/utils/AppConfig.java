@@ -90,7 +90,7 @@ public class AppConfig {
                     br.close();
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
 

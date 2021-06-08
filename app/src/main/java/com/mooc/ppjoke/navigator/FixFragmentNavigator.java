@@ -22,6 +22,8 @@ import java.util.Map;
 
 /**
  * 定制的Fragment导航器，替换ft.replace(mContainerId, frag);为 hide()/show()
+ *
+ * @author Zhangruiping
  */
 @Navigator.Name("fixfragment")
 public class FixFragmentNavigator extends FragmentNavigator {
@@ -66,6 +68,7 @@ public class FixFragmentNavigator extends FragmentNavigator {
             ft.setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim);
         }
 
+        // TODO FragmentNavigator改造
         Fragment fragment = mManager.getPrimaryNavigationFragment();
         if (fragment != null) {
             ft.hide(fragment);

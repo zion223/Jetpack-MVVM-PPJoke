@@ -23,7 +23,6 @@ import com.mooc.ppjoke.BR;
 import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.ui.state.PreviewViewModel;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
@@ -127,7 +126,6 @@ public class PreviewActivity extends BaseActivity {
     }
 
 
-    @NotNull
     private ProgressiveMediaSource createMediaSource(String previewUrl) {
         Uri uri = null;
         File file = new File(previewUrl);

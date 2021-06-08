@@ -17,7 +17,18 @@ import com.mooc.ppjoke.data.bean.Destination;
 import java.util.HashMap;
 import java.util.Iterator;
 
+/**
+ * @author Zhangruiping
+ */
 public class NavGraphBuilder {
+
+    /**
+     * 构建NavGraph方法
+     *
+     * @param activity    activity
+     * @param controller  controller
+     * @param containerId containerId
+     */
     public static void build(FragmentActivity activity, NavController controller, int containerId) {
         NavigatorProvider provider = controller.getNavigatorProvider();
 
@@ -31,9 +42,8 @@ public class NavGraphBuilder {
         provider.addNavigator(fragmentNavigator);
         ActivityNavigator activityNavigator = provider.getNavigator(ActivityNavigator.class);
         HashMap<String, Destination> destConfig = AppConfig.getDestConfig();
-        Iterator<Destination> iterator = destConfig.values().iterator();
-        while (iterator.hasNext()) {
-            Destination node = iterator.next();
+        // 遍历解析 destination.json 文件
+        for (Destination node : destConfig.values()) {
             if (node.isFragment) {
                 FragmentNavigator.Destination destination = fragmentNavigator.createDestination();
                 destination.setId(node.id);

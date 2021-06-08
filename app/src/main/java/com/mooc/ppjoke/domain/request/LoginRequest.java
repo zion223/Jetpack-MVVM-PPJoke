@@ -55,16 +55,16 @@ public class LoginRequest extends BaseRequest {
 		public void onComplete(Object o) {
 			JSONObject response = (JSONObject) o;
 			try {
-				String openid = response.getString("openid");
-				String access_token = response.getString("access_token");
-				String expires_in = response.getString("expires_in");
-				long expires_time = response.getLong("expires_time");
+                String openid = response.getString("openid");
+                String accessToken = response.getString("access_token");
+                String expiresIn = response.getString("expires_in");
+                long expiresTime = response.getLong("expires_time");
 
-				tencent.setOpenId(openid);
-				tencent.setAccessToken(access_token, expires_in);
-				QQToken qqToken = tencent.getQQToken();
-				getUserInfo(qqToken, expires_time, openid);
-			} catch (JSONException e) {
+                tencent.setOpenId(openid);
+                tencent.setAccessToken(accessToken, expiresIn);
+                QQToken qqToken = tencent.getQQToken();
+                getUserInfo(qqToken, expiresTime, openid);
+            } catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
@@ -73,29 +73,29 @@ public class LoginRequest extends BaseRequest {
 		public void onError(UiError uiError) {
 			UserManager.get().save(null);
 			loginMessage.postValue("登录失败:reason" + uiError.toString());
-		}
+        }
 
-		@Override
-		public void onCancel() {
-			UserManager.get().save(null);
-			loginMessage.postValue("登录取消");
-		}
-	};
+        @Override
+        public void onCancel() {
+            UserManager.get().save(null);
+            loginMessage.postValue("登录取消");
+        }
+    };
 
 
-	private void getUserInfo(QQToken qqToken, long expires_time, String openid) {
-		UserInfo userInfo = new UserInfo(Utils.getApp(), qqToken);
-		userInfo.getUserInfo(new IUiListener() {
-			@Override
-			public void onComplete(Object o) {
-				JSONObject response = (JSONObject) o;
+    private void getUserInfo(QQToken qqToken, long expiresTime, String openid) {
+        UserInfo userInfo = new UserInfo(Utils.getApp(), qqToken);
+        userInfo.getUserInfo(new IUiListener() {
+            @Override
+            public void onComplete(Object o) {
+                JSONObject response = (JSONObject) o;
 
-				try {
-					String nickname = response.getString("nickname");
-					String figureurl_2 = response.getString("figureurl_2");
+                try {
+                    String nickname = response.getString("nickname");
+                    String figureurl2 = response.getString("figureurl_2");
 
-					save(nickname, figureurl_2, openid, expires_time);
-				} catch (JSONException e) {
+                    save(nickname, figureurl2, openid, expiresTime);
+                } catch (JSONException e) {
 					e.printStackTrace();
 				}
 			}
@@ -104,27 +104,27 @@ public class LoginRequest extends BaseRequest {
 			public void onError(UiError uiError) {
 				UserManager.get().save(null);
 				loginMessage.postValue("登录失败:reason" + uiError.toString());
-			}
+            }
 
-			@Override
-			public void onCancel() {
-				UserManager.get().save(null);
-				loginMessage.postValue("登录取消");
-			}
-		});
-	}
+            @Override
+            public void onCancel() {
+                UserManager.get().save(null);
+                loginMessage.postValue("登录取消");
+            }
+        });
+    }
 
-	private void save(String nickname, String avatar, String openid, long expires_time) {
-		ApiService.get("/user/insert")
-				.addParam("name", nickname)
-				.addParam("avatar", avatar)
-				.addParam("qqOpenId", openid)
-				.addParam("expires_time", expires_time)
-				.execute(new JsonCallback<User>() {
-					@Override
-					public void onSuccess(ApiResponse<User> response) {
-						if (response.body != null) {
-							UserManager.get().save(response.body);
+    private void save(String nickname, String avatar, String openid, long expiresTime) {
+        ApiService.get("/user/insert")
+                .addParam("name", nickname)
+                .addParam("avatar", avatar)
+                .addParam("qqOpenId", openid)
+                .addParam("expires_time", expiresTime)
+                .execute(new JsonCallback<User>() {
+                    @Override
+                    public void onSuccess(ApiResponse<User> response) {
+                        if (response.body != null) {
+                            UserManager.get().save(response.body);
 							loginStatus.postValue(true);
 						} else {
 							loginMessage.postValue("登录失败");

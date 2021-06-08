@@ -26,7 +26,6 @@ import com.mooc.ppjoke.R;
 import com.mooc.ppjoke.data.bean.TagList;
 import com.mooc.ppjoke.ui.state.PublishViewModel;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,7 +209,6 @@ public class PublishActivity extends BaseActivity{
 
 
 	@SuppressLint("RestrictedApi")
-	@NotNull
 	private OneTimeWorkRequest getOneTimeWorkRequest(String filePath) {
 		Data inputData = new Data.Builder()
 				.putString("file", filePath)

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -38,6 +39,8 @@ import javax.tools.StandardLocation;
  * SupportedSourceVersion注解:声明我们所支持的jdk版本
  * <p>
  * SupportedAnnotationTypes:声明该注解处理器想要处理那些注解
+ *
+ * @author zhangruiping
  */
 @AutoService(Processor.class)
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
@@ -103,7 +106,7 @@ public class NavProcessor extends AbstractProcessor {
                 //利用fastjson把收集到的所有的页面信息 转换成JSON格式的。并输出到文件中
                 String content = JSON.toJSONString(destMap);
                 fos = new FileOutputStream(outPutFile);
-                writer = new OutputStreamWriter(fos, "UTF-8");
+                writer = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
                 writer.write(content);
                 writer.flush();
             } catch (IOException e) {
@@ -151,12 +154,14 @@ public class NavProcessor extends AbstractProcessor {
 
             Annotation annotation = element.getAnnotation(annotationClaz);
             if (annotation instanceof FragmentDestination) {
+                // Fragment类型的
                 FragmentDestination dest = (FragmentDestination) annotation;
                 pageUrl = dest.pageUrl();
                 asStarter = dest.asStarter();
                 needLogin = dest.needLogin();
                 isFragment = true;
             } else if (annotation instanceof ActivityDestination) {
+                // Activity类型的
                 ActivityDestination dest = (ActivityDestination) annotation;
                 pageUrl = dest.pageUrl();
                 asStarter = dest.asStarter();

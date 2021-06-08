@@ -25,7 +25,6 @@ import com.mooc.ppjoke.data.bean.User;
 import com.mooc.ppjoke.ui.login.UserManager;
 import com.mooc.ppjoke.ui.share.ShareDialog;
 
-import org.jetbrains.annotations.NotNull;
 
 
 public class InteractionPresenter {
@@ -338,7 +337,6 @@ public class InteractionPresenter {
         }
     }
 
-    @NotNull
     private static Observer<User> loginObserver(Observer<User> observer, LiveData<User> liveData) {
         return new Observer<User>() {
             @Override

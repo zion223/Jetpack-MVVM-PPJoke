@@ -3,6 +3,9 @@ package com.mooc.libnavannotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
+/**
+ * @author zhangruiping
+ */
 @Target(ElementType.TYPE)
 public @interface FragmentDestination {
     String pageUrl();
